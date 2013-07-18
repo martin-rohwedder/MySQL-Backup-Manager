@@ -25,27 +25,30 @@ namespace MySQLBackupService
 
         protected override void OnStart(string[] args)
         {
-            using (Process process = new Process())
+            try
             {
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.WorkingDirectory = @"C:\";
-                process.StartInfo.FileName = Path.Combine(Environment.SystemDirectory, "cmd.exe");
-                //Redirects the standard input so that commands can be sent to the shell
-                process.StartInfo.RedirectStandardInput = true;
+                DateTime time = DateTime.Now;
+                string path = "C:\\test\\Backup" + time.Hour + time.Minute + time.Second + ".sql";
+                StreamWriter writer = new StreamWriter(path);
 
-                process.OutputDataReceived += ProcessOutputDataHandler;
-                process.ErrorDataReceived += ProcessErrorDataHandler;
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = "mysqldump";
+                psi.RedirectStandardInput = false;
+                psi.RedirectStandardOutput = true;
+                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", "root", "admin", "localhost", "movstreamdb");
+                psi.UseShellExecute = false;
 
-                process.Start();
-                process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
+                Process process = Process.Start(psi);
 
-                process.StandardInput.WriteLine("dir");
-                process.StandardInput.WriteLine("exit");
-
+                string output = process.StandardOutput.ReadToEnd();
+                writer.WriteLine(output);
                 process.WaitForExit();
+                writer.Close();
+                process.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
