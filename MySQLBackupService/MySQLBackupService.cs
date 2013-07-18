@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySQLBackupService.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,10 +28,6 @@ namespace MySQLBackupService
         {
             try
             {
-                DateTime time = DateTime.Now;
-                string path = "C:\\test\\Backup" + time.Hour + time.Minute + time.Second + ".sql";
-                StreamWriter writer = new StreamWriter(path);
-
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = "mysqldump";
                 psi.RedirectStandardInput = false;
@@ -41,9 +38,13 @@ namespace MySQLBackupService
                 Process process = Process.Start(psi);
 
                 string output = process.StandardOutput.ReadToEnd();
-                writer.WriteLine(output);
+
+                BackupWriter writer = new BackupWriter();
+                writer.OpenWriter();
+                writer.Write(output);
+
                 process.WaitForExit();
-                writer.Close();
+                writer.CloseWriter();
                 process.Close();
             }
             catch (Exception ex)
