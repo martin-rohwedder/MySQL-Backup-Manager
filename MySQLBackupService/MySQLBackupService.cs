@@ -38,39 +38,28 @@ namespace MySQLBackupService
 
                 Process process = Process.Start(psi);
 
-                string output = "";
+                string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
 
-                if (!error.Equals(""))
+                //Can't find database error
+                if (error.Contains("Got error: 1049"))
                 {
-                    //Can't find database error
-                    if (error.Contains("Got error: 1049"))
-                    {
-                        output = error.Substring(error.IndexOf("Got error: 1049"));
-                    }
-                    //Can't find host error
-                    else if (error.Contains("Got error: 2005"))
-                    {
-                        output = error.Substring(error.IndexOf("Got error: 2005"));
-                    }
-                    //Wrong user/password error
-                    else if (error.Contains("Got error: 1045"))
-                    {
-                        output = error.Substring(error.IndexOf("Got error: 1045"));
-                    }
-                    //Can't connect to MySQL (probably is server down)
-                    else if (error.Contains("Got error: 2003"))
-                    {
-                        output = error.Substring(error.IndexOf("Got error: 2003"));
-                    }
-                    else
-                    {
-                        output = error;
-                    }
+                    output = error.Substring(error.IndexOf("Got error: 1049"));
                 }
-                else
+                //Can't find host error
+                else if (error.Contains("Got error: 2005"))
                 {
-                    output = process.StandardOutput.ReadToEnd();
+                    output = error.Substring(error.IndexOf("Got error: 2005"));
+                }
+                //Wrong user/password error
+                else if (error.Contains("Got error: 1045"))
+                {
+                    output = error.Substring(error.IndexOf("Got error: 1045"));
+                }
+                //Can't connect to MySQL (probably is server down)
+                else if (error.Contains("Got error: 2003"))
+                {
+                    output = error.Substring(error.IndexOf("Got error: 2003"));
                 }
 
                 BackupWriter writer = new BackupWriter();
