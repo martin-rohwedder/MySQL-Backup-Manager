@@ -32,12 +32,46 @@ namespace MySQLBackupService
                 psi.FileName = "mysqldump";
                 psi.RedirectStandardInput = false;
                 psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
                 psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", "root", "admin", "localhost", "movstreamdb");
                 psi.UseShellExecute = false;
 
                 Process process = Process.Start(psi);
 
-                string output = process.StandardOutput.ReadToEnd();
+                string output = "";
+                string error = process.StandardError.ReadToEnd();
+
+                if (!error.Equals(""))
+                {
+                    //Can't find database error
+                    if (error.Contains("Got error: 1049"))
+                    {
+                        output = error.Substring(error.IndexOf("Got error: 1049"));
+                    }
+                    //Can't find host error
+                    else if (error.Contains("Got error: 2005"))
+                    {
+                        output = error.Substring(error.IndexOf("Got error: 2005"));
+                    }
+                    //Wrong user/password error
+                    else if (error.Contains("Got error: 1045"))
+                    {
+                        output = error.Substring(error.IndexOf("Got error: 1045"));
+                    }
+                    //Can't connect to MySQL (probably is server down)
+                    else if (error.Contains("Got error: 2003"))
+                    {
+                        output = error.Substring(error.IndexOf("Got error: 2003"));
+                    }
+                    else
+                    {
+                        output = error;
+                    }
+                }
+                else
+                {
+                    output = process.StandardOutput.ReadToEnd();
+                }
 
                 BackupWriter writer = new BackupWriter();
                 writer.OpenWriter();
