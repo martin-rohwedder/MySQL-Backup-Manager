@@ -21,7 +21,7 @@ namespace MySQLBackupService.Classes
      * @since 18-07-2013
      * @version 1.0
      */
-    class BackupWriter : IBackupWriter
+    class BackupWriter : IWriter
     {
         private const string MAIN_PATH = @"C:\test\backup\MyDatabase\";
         private StreamWriter writer = null;
@@ -42,6 +42,7 @@ namespace MySQLBackupService.Classes
             else
             {
                 CloseWriter();
+                OpenWriter();
             }
         }
 

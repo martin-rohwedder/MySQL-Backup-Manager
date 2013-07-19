@@ -26,6 +26,9 @@ namespace MySQLBackupService
 
         protected override void OnStart(string[] args)
         {
+            BackupWriter writer = new BackupWriter();
+            Process process = null;
+
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
@@ -36,43 +39,30 @@ namespace MySQLBackupService
                 psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", "root", "admin", "localhost", "movstreamdb");
                 psi.UseShellExecute = false;
 
-                Process process = Process.Start(psi);
+                process = Process.Start(psi);
 
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
 
-                //Can't find database error
-                if (error.Contains("Got error: 1049"))
+                if (!this.HasErrorOccured(error))
                 {
-                    output = error.Substring(error.IndexOf("Got error: 1049"));
+                    writer.OpenWriter();
+                    writer.Write(output);
                 }
-                //Can't find host error
-                else if (error.Contains("Got error: 2005"))
-                {
-                    output = error.Substring(error.IndexOf("Got error: 2005"));
-                }
-                //Wrong user/password error
-                else if (error.Contains("Got error: 1045"))
-                {
-                    output = error.Substring(error.IndexOf("Got error: 1045"));
-                }
-                //Can't connect to MySQL (probably is server down)
-                else if (error.Contains("Got error: 2003"))
-                {
-                    output = error.Substring(error.IndexOf("Got error: 2003"));
-                }
-
-                BackupWriter writer = new BackupWriter();
-                writer.OpenWriter();
-                writer.Write(output);
 
                 process.WaitForExit();
-                writer.CloseWriter();
-                process.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                writer.CloseWriter();
+                if (process != null)
+                {
+                    process.Close();
+                }
             }
         }
 
@@ -81,14 +71,57 @@ namespace MySQLBackupService
             
         }
 
-        public static void ProcessOutputDataHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        /**
+         * Find out if an error has occured during the backup dump. Returns true if error has occured
+         */
+        private bool HasErrorOccured(string errorOutput)
         {
-            Console.WriteLine(outLine.Data);
+            bool errorOccured = false;
+
+            //Can't find database error
+            if (errorOutput.Contains("Got error: 1049"))
+            {
+                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 1049")));
+                errorOccured = true;
+            }
+            //Can't find host error
+            else if (errorOutput.Contains("Got error: 2005"))
+            {
+                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 2005")));
+                errorOccured = true;
+            }
+            //Wrong user/password error
+            else if (errorOutput.Contains("Got error: 1045"))
+            {
+                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 1045")));
+                errorOccured = true;
+            }
+            //Can't connect to MySQL (probably is server down)
+            else if (errorOutput.Contains("Got error: 2003"))
+            {
+                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")));
+                errorOccured = true;
+            }
+
+            return errorOccured;
         }
 
-        public static void ProcessErrorDataHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        private void LogError(string error)
         {
-            Console.WriteLine(outLine.Data);
+            LogWriter logWriter = new LogWriter();
+            try
+            {
+                logWriter.OpenWriter();
+                logWriter.Write(error);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                logWriter.CloseWriter();
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MySQLBackupService.Classes
      * @since 18-07-2013
      * @version 1.0
      */
-    interface IBackupWriter
+    interface IWriter
     {
         void OpenWriter();
         void Write(string data);

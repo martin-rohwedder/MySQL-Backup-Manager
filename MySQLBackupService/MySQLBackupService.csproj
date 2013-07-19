@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Classes\BackupWriter.cs" />
     <Compile Include="Classes\IBackupWriter.cs" />
+    <Compile Include="Classes\LogWriter.cs" />
     <Compile Include="MySQLBackupService.cs">
       <SubType>Component</SubType>
     </Compile>
