@@ -23,8 +23,11 @@ namespace MySQLBackupService.Classes
      */
     class BackupWriter : IWriter
     {
-        private const string MAIN_PATH = @"C:\test\backup\MyDatabase\";
+        private const string MAIN_PATH = @"C:\test\backup";
         private StreamWriter writer = null;
+
+        //Properties
+        public string DatabaseName { get; set; }
 
         /**
          * Open a StreamWriter instance
@@ -33,11 +36,12 @@ namespace MySQLBackupService.Classes
         {
             if (writer == null)
             {
-                if (!Directory.Exists(MAIN_PATH))
+                if (!Directory.Exists(MAIN_PATH + @"\" + DatabaseName + @"\"))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(MAIN_PATH));
+                    Directory.CreateDirectory(Path.GetDirectoryName(MAIN_PATH + @"\" + DatabaseName + @"\"));
                 }
-                writer = new StreamWriter(MAIN_PATH + "backup.sql");
+                DateTime dateTime = DateTime.Now;
+                writer = new StreamWriter(MAIN_PATH + @"\" + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}{5}.sql", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute));
             }
             else
             {
