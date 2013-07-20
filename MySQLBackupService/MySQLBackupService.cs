@@ -103,38 +103,39 @@ namespace MySQLBackupService
             //Can't find database error
             if (errorOutput.Contains("Got error: 1049"))
             {
-                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 1049")));
+                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 1049")), "ERROR");
                 errorOccured = true;
             }
             //Can't find host error
             else if (errorOutput.Contains("Got error: 2005"))
             {
-                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 2005")));
+                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2005")), "ERROR");
                 errorOccured = true;
             }
             //Wrong user/password error
             else if (errorOutput.Contains("Got error: 1045"))
             {
-                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 1045")));
+                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 1045")), "ERROR");
                 errorOccured = true;
             }
             //Can't connect to MySQL (probably is server down)
             else if (errorOutput.Contains("Got error: 2003"))
             {
-                this.LogError(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")));
+                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")), "ERROR");
                 errorOccured = true;
             }
 
             return errorOccured;
         }
 
-        private void LogError(string error)
+        private void Log(string output, string type)
         {
             LogWriter logWriter = new LogWriter();
             try
             {
                 logWriter.OpenWriter();
-                logWriter.Write(error);
+                logWriter.Type = type;
+                logWriter.Write(output);
             }
             catch (Exception ex)
             {

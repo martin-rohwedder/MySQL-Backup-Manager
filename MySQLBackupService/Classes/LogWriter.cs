@@ -11,6 +11,8 @@ namespace MySQLBackupService.Classes
     {
         private StreamWriter writer = null;
 
+        public string Type { get; set; }
+
         public void OpenWriter()
         {
             if (writer == null)
@@ -30,7 +32,7 @@ namespace MySQLBackupService.Classes
             if (writer != null)
             {
                 DateTime dateTime = DateTime.Now;
-                writer.WriteLine(string.Format("{0}/{1}/{2} {3}:{4}:{5} - ERROR - {6}", dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute, dateTime.Second, data));
+                writer.WriteLine(string.Format("{0}/{1}/{2} {3}:{4}:{5} - {6} - {7}", dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute, dateTime.Second, Type, data));
             }
         }
 
