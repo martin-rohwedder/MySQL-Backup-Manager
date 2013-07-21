@@ -18,6 +18,7 @@ namespace MySQLBackupService
         public string error { get; set; }
         public string output { get; set; }
         public string databaseName { get; set; }
+        public bool ServerDown { get; set; }
 
         public MySQLBackupService()
         {
@@ -33,6 +34,7 @@ namespace MySQLBackupService
         {
             BackupWriter writer = new BackupWriter();
             Process process = null;
+            ServerDown = false;
 
             try
             {
@@ -62,38 +64,43 @@ namespace MySQLBackupService
 
         private void ProcessMySqlDump(Process process, BackupWriter writer)
         {
+            ServerDown = false;
             XmlDocument document = new XmlDocument();
             document.Load("Configuration/Databases.xml");
 
             XmlNodeList nodeList = document.SelectNodes("Databases/Database");
             foreach (XmlNode node in nodeList)
             {
-                this.databaseName = node["DatabaseName"].InnerText;
-
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "mysqldump";
-                psi.RedirectStandardInput = false;
-                psi.RedirectStandardOutput = true;
-                psi.RedirectStandardError = true;
-                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
-                psi.UseShellExecute = false;
-
-                process = Process.Start(psi);
-
-                this.output = process.StandardOutput.ReadToEnd();
-                this.error = process.StandardError.ReadToEnd();
-
-                if (!this.HasErrorOccured(this.error))
+                if (!ServerDown)
                 {
-                    writer.DatabaseName = this.databaseName;
-                    writer.OpenWriter();
-                    writer.Write(this.output);
-                    this.Log("Database backup created of the database " + this.databaseName, "INFO");
-                }
-            }
 
-            process.WaitForExit();
-            Console.WriteLine("MySQL Dump Process finished");
+                    this.databaseName = node["DatabaseName"].InnerText;
+
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = "mysqldump";
+                    psi.RedirectStandardInput = false;
+                    psi.RedirectStandardOutput = true;
+                    psi.RedirectStandardError = true;
+                    psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
+                    psi.UseShellExecute = false;
+
+                    process = Process.Start(psi);
+
+                    this.output = process.StandardOutput.ReadToEnd();
+                    this.error = process.StandardError.ReadToEnd();
+
+                    if (!this.HasErrorOccured(this.error))
+                    {
+                        writer.DatabaseName = this.databaseName;
+                        writer.OpenWriter();
+                        writer.Write(this.output);
+                        this.Log("Database backup created of the database " + this.databaseName, "INFO");
+                    }
+                }
+
+                process.WaitForExit();
+                Console.WriteLine("MySQL Dump Process finished");
+            }
         }
 
         /**
@@ -124,7 +131,8 @@ namespace MySQLBackupService
             //Can't connect to MySQL (probably is server down)
             else if (errorOutput.Contains("Got error: 2003"))
             {
-                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")), "ERROR");
+                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")).TrimEnd('\r', '\n'), "ERROR");
+                ServerDown = true;
                 errorOccured = true;
             }
 
