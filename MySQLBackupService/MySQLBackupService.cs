@@ -36,16 +36,7 @@ namespace MySQLBackupService
 
             try
             {
-                this.ProcessMySqlDump(process);
-
-                if (!this.HasErrorOccured(this.error))
-                {
-                    writer.DatabaseName = this.databaseName;
-                    writer.OpenWriter();
-                    writer.Write(this.output);
-                }
-
-                process.WaitForExit();
+                this.ProcessMySqlDump(process, writer);
             }
             catch (Exception ex)
             {
@@ -69,28 +60,38 @@ namespace MySQLBackupService
             
         }
 
-        private void ProcessMySqlDump(Process process)
+        private void ProcessMySqlDump(Process process, BackupWriter writer)
         {
             XmlDocument document = new XmlDocument();
             document.Load("Configuration/Databases.xml");
-            XmlNode host = document.SelectSingleNode("/Databases/Database/Host/text()");
-            XmlNode user = document.SelectSingleNode("/Databases/Database/User/text()");
-            XmlNode password = document.SelectSingleNode("/Databases/Database/Password/text()");
-            XmlNode databaseName = document.SelectSingleNode("/Databases/Database/DatabaseName/text()");
-            this.databaseName = databaseName.Value;
 
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = "mysqldump";
-            psi.RedirectStandardInput = false;
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", user.Value, password.Value, host.Value, this.databaseName);
-            psi.UseShellExecute = false;
+            XmlNodeList nodeList = document.SelectNodes("Databases/Database");
+            foreach (XmlNode node in nodeList)
+            {
+                this.databaseName = node["DatabaseName"].InnerText;
 
-            process = Process.Start(psi);
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = "mysqldump";
+                psi.RedirectStandardInput = false;
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
+                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
+                psi.UseShellExecute = false;
 
-            this.output = process.StandardOutput.ReadToEnd();
-            this.error = process.StandardError.ReadToEnd();
+                process = Process.Start(psi);
+
+                this.output = process.StandardOutput.ReadToEnd();
+                this.error = process.StandardError.ReadToEnd();
+
+                if (!this.HasErrorOccured(this.error))
+                {
+                    writer.DatabaseName = this.databaseName;
+                    writer.OpenWriter();
+                    writer.Write(this.output);
+                }
+            }
+
+            process.WaitForExit();
         }
 
         /**

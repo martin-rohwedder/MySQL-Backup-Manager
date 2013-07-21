@@ -26,4 +26,15 @@
       <StartTime>04:00</StartTime>
     </BackupSettings>
   </Database>
+
+  <Database>
+    <Host>localhost</Host>
+    <User>root</User>
+    <Password>admin</Password>
+    <DatabaseName>martinrohwedder</DatabaseName>
+
+    <BackupSettings>
+      <StartTime>04:00</StartTime>
+    </BackupSettings>
+  </Database>
 </Databases>
