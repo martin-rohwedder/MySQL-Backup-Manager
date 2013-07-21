@@ -88,10 +88,12 @@ namespace MySQLBackupService
                     writer.DatabaseName = this.databaseName;
                     writer.OpenWriter();
                     writer.Write(this.output);
+                    this.Log("Database backup created of the database " + this.databaseName, "INFO");
                 }
             }
 
             process.WaitForExit();
+            Console.WriteLine("MySQL Dump Process finished");
         }
 
         /**
