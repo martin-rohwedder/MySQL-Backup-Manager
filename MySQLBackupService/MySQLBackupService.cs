@@ -38,6 +38,7 @@ namespace MySQLBackupService
             IScheduler scheduler = schedFactory.GetScheduler();
             scheduler.Start();
 
+            //Scheduler Details
             IJobDetail jobDetail = new JobDetailImpl("BackupJob", typeof(MySqlDumpProcess));
             ITrigger trigger = TriggerBuilder.Create().WithDailyTimeIntervalSchedule(s => s.WithIntervalInMinutes(1).OnEveryDay()).Build();
 
