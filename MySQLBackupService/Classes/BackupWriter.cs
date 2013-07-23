@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace MySQLBackupService.Classes
 {
@@ -23,7 +24,7 @@ namespace MySQLBackupService.Classes
      */
     class BackupWriter : IWriter
     {
-        private const string MAIN_PATH = @"C:\test\backup";
+        private string default_path = AppDomain.CurrentDomain.BaseDirectory + @"backup\";
         private StreamWriter writer = null;
 
         //Properties
@@ -36,12 +37,12 @@ namespace MySQLBackupService.Classes
         {
             if (writer == null)
             {
-                if (!Directory.Exists(MAIN_PATH + @"\" + DatabaseName + @"\"))
+                if (!Directory.Exists(this.GetBackupPath() + DatabaseName + @"\"))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(MAIN_PATH + @"\" + DatabaseName + @"\"));
+                    Directory.CreateDirectory(Path.GetDirectoryName(this.GetBackupPath() + DatabaseName + @"\"));
                 }
                 DateTime dateTime = DateTime.Now;
-                writer = new StreamWriter(MAIN_PATH + @"\" + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}{5}.sql", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute));
+                writer = new StreamWriter(this.GetBackupPath() + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}{5}.sql", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute));
             }
             else
             {
@@ -70,6 +71,34 @@ namespace MySQLBackupService.Classes
             {
                 writer.Close();
                 writer = null;
+            }
+        }
+
+        /**
+         * Retrieve the backup path specififed in the configuration. If empty use default path.
+         */
+        private string GetBackupPath()
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load("Configuration/Configuration.xml");
+            XmlNode backupPathNode = document.SelectSingleNode("Configuration/BackupPath");
+
+            //Return default path if node value is empty
+            if (backupPathNode.InnerText.Trim().Equals(""))
+            {
+                return default_path;
+            }
+            else
+            {
+                //Insert backslash at the end of path if it's not present
+                if (!backupPathNode.InnerText.Trim().EndsWith(@"\"))
+                {
+                    return backupPathNode.InnerText + @"\";
+                }
+                else
+                {
+                    return backupPathNode.InnerText;
+                }
             }
         }
     }
