@@ -43,11 +43,37 @@ namespace MySQLBackupService
             ITrigger trigger = TriggerBuilder.Create().WithDailyTimeIntervalSchedule(s => s.WithIntervalInMinutes(1).OnEveryDay()).Build();
 
             scheduler.ScheduleJob(jobDetail, trigger);
+
+            //Log Information about the service has started
+            this.Log("The MySQL Backup Service has been started", "INFO");
         }
 
         protected override void OnStop()
         {
-            
+            //Log Information about the service has stopped
+            this.Log("The MySQL Backup Service has been stopped", "INFO");
+        }
+
+        /**
+         * Log message to the Log.txt file. Type indicates the message type, eg. Error, information etc.
+         */
+        private void Log(string output, string type)
+        {
+            LogWriter logWriter = new LogWriter();
+            try
+            {
+                logWriter.OpenWriter();
+                logWriter.Type = type;
+                logWriter.Write(output);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                logWriter.CloseWriter();
+            }
         }
     }
 }
