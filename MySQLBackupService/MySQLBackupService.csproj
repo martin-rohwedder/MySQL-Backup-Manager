@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BackupWriter.cs" />
+    <Compile Include="Classes\DeleteBackupFilesJob.cs" />
     <Compile Include="Classes\IBackupWriter.cs" />
     <Compile Include="Classes\LogWriter.cs" />
     <Compile Include="Classes\MySqlDumpProcess.cs" />

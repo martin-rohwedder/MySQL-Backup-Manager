@@ -24,7 +24,7 @@ namespace MySQLBackupService.Classes
      */
     class BackupWriter : IWriter
     {
-        private string default_path = AppDomain.CurrentDomain.BaseDirectory + @"backup\";
+        private string defaultPath = AppDomain.CurrentDomain.BaseDirectory + @"backup\";
         private StreamWriter writer = null;
 
         //Properties
@@ -86,7 +86,7 @@ namespace MySQLBackupService.Classes
             //Return default path if node value is empty
             if (backupPathNode.InnerText.Trim().Equals(""))
             {
-                return default_path;
+                return defaultPath;
             }
             else
             {

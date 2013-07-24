@@ -47,6 +47,9 @@ namespace MySQLBackupService.Classes
             }
         }
 
+        /**
+         * Process The MySQL Dump for each database
+         */
         private void ProcessMySqlDump(Process process, BackupWriter writer)
         {
             XmlDocument document = new XmlDocument();

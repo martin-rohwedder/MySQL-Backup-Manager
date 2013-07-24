@@ -38,11 +38,16 @@ namespace MySQLBackupService
             IScheduler scheduler = schedFactory.GetScheduler();
             scheduler.Start();
 
-            //Scheduler Details
-            IJobDetail jobDetail = new JobDetailImpl("BackupJob", typeof(MySqlDumpProcess));
-            ITrigger trigger = TriggerBuilder.Create().WithDailyTimeIntervalSchedule(s => s.WithIntervalInMinutes(1).OnEveryDay()).Build();
+            //MySQL Backup Job Scheduler Details
+            IJobDetail backupJobDetail = new JobDetailImpl("BackupJob", typeof(MySqlDumpProcess));
+            ITrigger backupTrigger = TriggerBuilder.Create().WithDailyTimeIntervalSchedule(s => s.WithIntervalInMinutes(1).OnEveryDay()).Build();
 
-            scheduler.ScheduleJob(jobDetail, trigger);
+            //Delete Old Backups Job Scheduler Details
+            IJobDetail deleteBackupJobDetail = new JobDetailImpl("DeleteBackupJob", typeof(DeleteBackupFilesJob));
+            ITrigger deleteBackupTrigger = TriggerBuilder.Create().WithDailyTimeIntervalSchedule(s => s.WithIntervalInHours(24).OnEveryDay().StartingDailyAt(TimeOfDay.HourMinuteAndSecondOfDay(0,0,5))).Build();
+
+            scheduler.ScheduleJob(backupJobDetail, backupTrigger);   //Schedule MySQL Backup Job
+            scheduler.ScheduleJob(deleteBackupJobDetail, deleteBackupTrigger);   //Schedule Delete Backup Job
 
             //Log Information about the service has started
             this.Log("The MySQL Backup Service has been started", "INFO");
