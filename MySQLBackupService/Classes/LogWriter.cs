@@ -32,7 +32,7 @@ namespace MySQLBackupService.Classes
             if (writer != null)
             {
                 DateTime dateTime = DateTime.Now;
-                writer.WriteLine(string.Format("{0}/{1}/{2} {3}:{4} - {5} - {6}", dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute, Type, data));
+                writer.WriteLine(string.Format("{0}/{1}/{2} {3} - {4} - {5}", dateTime.Day, dateTime.Month, dateTime.Year, dateTime.ToString("HH:mm"), Type, data));
             }
         }
 

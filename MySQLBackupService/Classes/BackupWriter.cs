@@ -42,7 +42,7 @@ namespace MySQLBackupService.Classes
                     Directory.CreateDirectory(Path.GetDirectoryName(this.GetBackupPath() + DatabaseName + @"\"));
                 }
                 DateTime dateTime = DateTime.Now;
-                writer = new StreamWriter(this.GetBackupPath() + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}{5}.sql", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute));
+                writer = new StreamWriter(this.GetBackupPath() + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}.dump", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.ToString("HHmm")));
             }
             else
             {

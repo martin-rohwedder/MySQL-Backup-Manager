@@ -55,35 +55,43 @@ namespace MySQLBackupService.Classes
             XmlNodeList nodeList = document.SelectNodes("Databases/Database");
             foreach (XmlNode node in nodeList)
             {
+                System.Threading.Thread.Sleep(1000);   //Let Application Sleep for 1 second, preventing multiple backup executions of the same database.
+
                 if (!ServerDown)
                 {
+                    string[] timeArray = node["BackupSettings"].SelectSingleNode("StartTime").InnerText.Split(':');
 
-                    this.databaseName = node["DatabaseName"].InnerText;
-
-                    ProcessStartInfo psi = new ProcessStartInfo();
-                    psi.FileName = "mysqldump";
-                    psi.RedirectStandardInput = false;
-                    psi.RedirectStandardOutput = true;
-                    psi.RedirectStandardError = true;
-                    psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
-                    psi.UseShellExecute = false;
-
-                    process = Process.Start(psi);
-
-                    this.output = process.StandardOutput.ReadToEnd();
-                    this.error = process.StandardError.ReadToEnd();
-
-                    if (!this.HasErrorOccured(this.error))
+                    if (Convert.ToInt32(timeArray[0]) == DateTime.Now.Hour && Convert.ToInt32(timeArray[1]) == DateTime.Now.Minute)
                     {
-                        writer.DatabaseName = this.databaseName;
-                        writer.OpenWriter();
-                        writer.Write(this.output);
-                        this.Log("Database backup created of the database " + this.databaseName, "INFO");
+                        this.databaseName = node["DatabaseName"].InnerText;
+
+                        ProcessStartInfo psi = new ProcessStartInfo();
+                        psi.FileName = "mysqldump";
+                        psi.RedirectStandardInput = false;
+                        psi.RedirectStandardOutput = true;
+                        psi.RedirectStandardError = true;
+                        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
+                        psi.UseShellExecute = false;
+
+                        process = Process.Start(psi);
+
+                        this.output = process.StandardOutput.ReadToEnd();
+                        this.error = process.StandardError.ReadToEnd();
+
+                        if (!this.HasErrorOccured(this.error))
+                        {
+                            writer.DatabaseName = this.databaseName;
+                            writer.OpenWriter();
+                            writer.Write(this.output);
+                            this.Log("Database backup created of the database " + this.databaseName, "INFO");
+                        }
                     }
                 }
 
-                process.WaitForExit();
-                Console.WriteLine("MySQL Dump Process finished");
+                if (process != null)
+                {
+                    process.WaitForExit();
+                }
             }
         }
 

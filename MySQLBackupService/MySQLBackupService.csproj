@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="Configuration\Configuration.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Configuration\Databases.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
