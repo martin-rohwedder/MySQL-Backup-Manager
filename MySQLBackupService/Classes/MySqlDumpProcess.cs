@@ -75,6 +75,7 @@ namespace MySQLBackupService.Classes
                         psi.RedirectStandardError = true;
                         psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
                         psi.UseShellExecute = false;
+                        psi.CreateNoWindow = true;
 
                         process = Process.Start(psi);
 
