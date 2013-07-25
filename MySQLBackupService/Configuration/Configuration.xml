@@ -3,9 +3,6 @@
   <!-- the Path where to save backup files. eg. C:\backup -->
   <BackupPath></BackupPath>
   
-  <!-- The path to your MySQL Server installation Bin folder. Usually C:\Program Files\MySQL\MySQL Server 5.6\bin -->
-  <MysqlBinPath></MysqlBinPath>
-  
   <!-- Delete backups older than 'n' days -->
   <DeleteBackupsOlderThan>7</DeleteBackupsOlderThan>
 </Configuration>
