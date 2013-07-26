@@ -1,8 +1,16 @@
-﻿<Window x:Name="BackupManagerMainWindow" x:Class="MySQLBackupManager.MainWindow"
+﻿<mui:ModernWindow x:Name="BackupManagerMainWindow" x:Class="MySQLBackupManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MySQL Backup Manager" Height="450" Width="650" Icon="Resources/Icons/MySQLBackupManager-System-Tray-Icon.ico" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFEEEEEE">
-        
-    </Grid>
-</Window>
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="MySQL Backup Manager" Height="450" Width="650" Icon="Resources/Icons/MySQLBackupManager-System-Tray-Icon.ico" WindowStartupLocation="CenterScreen" ContentSource="/Views/MyDatabasesView.xaml">
+    
+    <!-- Menu with application links -->
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Databases">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="My Databases" Source="/Views/MyDatabasesView.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+    
+</mui:ModernWindow>

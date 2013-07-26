@@ -1,5 +1,4 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MySQLBackupManager
+namespace MySQLBackupManager.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MyDatabasesView.xaml
     /// </summary>
-    public partial class MainWindow : ModernWindow
+    public partial class MyDatabasesView : Page
     {
-        public MainWindow()
+        public MyDatabasesView()
         {
             InitializeComponent();
         }
