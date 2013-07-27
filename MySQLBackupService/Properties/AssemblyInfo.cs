@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MySQL Backup Service")]
 [assembly: AssemblyDescription("Automatic backup service of MySQL databases")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Martin Rohwedder Software")]
+[assembly: AssemblyCompany("Rohwedder Software")]
 [assembly: AssemblyProduct("MySQL Backup Service")]
 [assembly: AssemblyCopyright("Copyright © Martin Rohwedder 2013")]
 [assembly: AssemblyTrademark("")]
