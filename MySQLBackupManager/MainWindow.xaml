@@ -2,13 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-        Title="MySQL Backup Manager" Height="450" Width="650" Icon="Resources/Icons/MySQLBackupManager-System-Tray-Icon.ico" WindowStartupLocation="CenterScreen" ContentSource="/Views/MyDatabasesView.xaml">
+        Title="MySQL Backup Manager" Height="450" Width="650" Icon="Resources/Icons/MySQLBackupManager-System-Tray-Icon.ico" WindowStartupLocation="CenterScreen" ContentSource="/Views/DatabasesPage.xaml">
     
     <!-- Menu with application links -->
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="Databases">
+        <mui:LinkGroup DisplayName="MySQL Backup Manager">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="My Databases" Source="/Views/MyDatabasesView.xaml" />
+                <mui:Link DisplayName="Databases" Source="/Views/DatabasesPage.xaml" />
+                <mui:Link DisplayName="Information" />
+                <mui:Link DisplayName="Settings" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>

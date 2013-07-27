@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MySQLBackupManager.Views
 {
     /// <summary>
-    /// Interaction logic for MyDatabasesView.xaml
+    /// Interaction logic for DatabasesPage.xaml
     /// </summary>
-    public partial class MyDatabasesView : Page
+    public partial class DatabasesPage : Page
     {
-        public MyDatabasesView()
+        public DatabasesPage()
         {
             InitializeComponent();
         }
