@@ -1,4 +1,5 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,19 @@ namespace MySQLBackupManager
         public MainWindow()
         {
             InitializeComponent();
+
+            //Load the user settings
+            this.LoadUserSettings();
+        }
+
+        /**
+         * Load User settings saved in the settings.settings file
+         */
+        private void LoadUserSettings()
+        {
+            AppearanceManager.Current.ThemeSource = Properties.Settings.Default.ApplicationTheme;
+            AppearanceManager.Current.AccentColor = Properties.Settings.Default.ApplicationColor;
+            AppearanceManager.Current.FontSize = Properties.Settings.Default.ApplicationFontSize;
         }
     }
 }

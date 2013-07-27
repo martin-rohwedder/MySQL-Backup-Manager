@@ -112,6 +112,9 @@ namespace MySQLBackupManager.Pages.Content
 
                     // and update the actual theme
                     AppearanceManager.Current.ThemeSource = value.Source;
+
+                    Properties.Settings.Default.ApplicationTheme = AppearanceManager.Current.ThemeSource;
+                    Properties.Settings.Default.Save();
                 }
             }
         }
@@ -127,6 +130,9 @@ namespace MySQLBackupManager.Pages.Content
                     OnPropertyChanged("SelectedFontSize");
 
                     AppearanceManager.Current.FontSize = value == FontLarge ? FontSize.Large : FontSize.Small;
+
+                    Properties.Settings.Default.ApplicationFontSize = AppearanceManager.Current.FontSize;
+                    Properties.Settings.Default.Save();
                 }
             }
         }
@@ -142,6 +148,9 @@ namespace MySQLBackupManager.Pages.Content
                     OnPropertyChanged("SelectedAccentColor");
 
                     AppearanceManager.Current.AccentColor = value;
+
+                    Properties.Settings.Default.ApplicationColor = AppearanceManager.Current.AccentColor;
+                    Properties.Settings.Default.Save();
                 }
             }
         }
