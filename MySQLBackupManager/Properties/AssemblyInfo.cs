@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MySQLBackupManager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MySQL Backup Manager")]
+[assembly: AssemblyDescription("Graphical User Interface Client, providing a simple way to handle backup of the users MySQL databases using the MySQL Backup Service")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MySQLBackupManager")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCompany("Rohwedder Software")]
+[assembly: AssemblyProduct("MySQL Backup Manager")]
+[assembly: AssemblyCopyright("Copyright © Martin Rohwedder 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
