@@ -25,7 +25,7 @@ namespace MySQLBackupManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FFFF")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF1BA1E2")]
         public global::System.Windows.Media.Color ApplicationColor {
             get {
                 return ((global::System.Windows.Media.Color)(this["ApplicationColor"]));
@@ -37,9 +37,10 @@ namespace MySQLBackupManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Uri ApplicationTheme {
+        [global::System.Configuration.DefaultSettingValueAttribute("LightThemeSource")]
+        public string ApplicationTheme {
             get {
-                return ((global::System.Uri)(this["ApplicationTheme"]));
+                return ((string)(this["ApplicationTheme"]));
             }
             set {
                 this["ApplicationTheme"] = value;

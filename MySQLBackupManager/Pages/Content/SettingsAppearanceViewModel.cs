@@ -113,7 +113,7 @@ namespace MySQLBackupManager.Pages.Content
                     // and update the actual theme
                     AppearanceManager.Current.ThemeSource = value.Source;
 
-                    Properties.Settings.Default.ApplicationTheme = AppearanceManager.Current.ThemeSource;
+                    Properties.Settings.Default.ApplicationTheme = value.Source.Equals(AppearanceManager.DarkThemeSource) ? "DarkThemeSource" : "LightThemeSource";
                     Properties.Settings.Default.Save();
                 }
             }

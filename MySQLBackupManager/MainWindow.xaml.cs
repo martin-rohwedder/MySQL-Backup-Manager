@@ -35,7 +35,7 @@ namespace MySQLBackupManager
          */
         private void LoadUserSettings()
         {
-            AppearanceManager.Current.ThemeSource = Properties.Settings.Default.ApplicationTheme;
+            AppearanceManager.Current.ThemeSource = Properties.Settings.Default.ApplicationTheme.Equals("LightThemeSource") ? AppearanceManager.LightThemeSource : AppearanceManager.DarkThemeSource;
             AppearanceManager.Current.AccentColor = Properties.Settings.Default.ApplicationColor;
             AppearanceManager.Current.FontSize = Properties.Settings.Default.ApplicationFontSize;
         }

@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="ApplicationColor" Type="System.Windows.Media.Color" Scope="User">
-      <Value Profile="(Default)">#FF00FFFF</Value>
+      <Value Profile="(Default)">#FF1BA1E2</Value>
     </Setting>
-    <Setting Name="ApplicationTheme" Type="System.Uri" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="ApplicationTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LightThemeSource</Value>
     </Setting>
     <Setting Name="ApplicationFontSize" Type="FirstFloor.ModernUI.Presentation.FontSize" Scope="User">
       <Value Profile="(Default)">Large</Value>
