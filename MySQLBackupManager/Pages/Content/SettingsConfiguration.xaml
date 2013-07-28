@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="MySQLBackupManager.Pages.Content.SettingsConfiguration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="450">
+    <Grid Style="{StaticResource ContentRoot}">
+        <ScrollViewer>
+            <StackPanel MinWidth="150">
+                <TextBlock Text="CONFIGURATION" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+
+                <Grid HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition MinWidth="150"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!-- Backup Location -->
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Backup Location:" VerticalAlignment="Center" Margin="0,0,16,10" />
+                    <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsEnabled="False" Margin="0,0,0,10" />
+                    <Button Grid.Column="2" Grid.Row="0" Content="Browse Location" Margin="16,0,0,10" />
+                    
+                    <!-- Delete Backups Older than -->
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Delete Backups Older Than:" VerticalAlignment="Center" Margin="0,0,16,10" />
+                    <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,0,10" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

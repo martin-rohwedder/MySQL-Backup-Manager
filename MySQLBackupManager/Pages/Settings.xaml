@@ -11,6 +11,7 @@
         <mui:ModernTab Layout="List" SelectedSource="/Pages/Content/SettingsAppearance.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="appearance" Source="/Pages/Content/SettingsAppearance.xaml" />
+                <mui:Link DisplayName="Configuration" Source="/Pages/Content/SettingsConfiguration.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

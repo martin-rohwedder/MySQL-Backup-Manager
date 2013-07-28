@@ -62,6 +62,9 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Content\SettingsAppearanceViewModel.cs" />
+    <Compile Include="Pages\Content\SettingsConfiguration.xaml.cs">
+      <DependentUpon>SettingsConfiguration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DatabasesPage.xaml.cs">
       <DependentUpon>DatabasesPage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Content\SettingsAppearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Content\SettingsConfiguration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
