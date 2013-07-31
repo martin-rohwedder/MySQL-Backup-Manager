@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLBackupManager", "MySQL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLBackupLibrary", "MySQLBackupLibrary\MySQLBackupLibrary.csproj", "{019F9BE8-E8A9-43B3-B43D-02E29F00E403}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLBackupLibraryTest", "MySQLBackupLibraryTest\MySQLBackupLibraryTest.csproj", "{C9B2207E-A861-4EC4-A7D1-59FFF5FE04B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{019F9BE8-E8A9-43B3-B43D-02E29F00E403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019F9BE8-E8A9-43B3-B43D-02E29F00E403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019F9BE8-E8A9-43B3-B43D-02E29F00E403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B2207E-A861-4EC4-A7D1-59FFF5FE04B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B2207E-A861-4EC4-A7D1-59FFF5FE04B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B2207E-A861-4EC4-A7D1-59FFF5FE04B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B2207E-A861-4EC4-A7D1-59FFF5FE04B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
