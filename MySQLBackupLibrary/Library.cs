@@ -51,5 +51,20 @@ namespace MySQLBackupLibrary
         {
             return (int) configHandler.GetDeleteBackupsOlderThanDays();
         }
+
+        /**
+         * Write output to a backup file for the specified database
+         */
+        public void WriteBackupFile(string databaseName, string output)
+        {
+            BackupWriter backupWriter = new BackupWriter();
+
+            backupWriter.DatabaseName = databaseName;
+            backupWriter.OpenWriter();
+            backupWriter.Write(output);
+            backupWriter.CloseWriter();
+
+            backupWriter = null;
+        }
     }
 }

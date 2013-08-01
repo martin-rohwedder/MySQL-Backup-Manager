@@ -74,5 +74,29 @@ namespace MySQLBackupLibraryTest
             Assert.AreEqual(7, days);
             lib = null;
         }
+
+        [TestMethod]
+        public void WriteDataToBackupFileTest()
+        {
+            Library lib = new Library();
+            string databaseName = "test_database";
+            lib.WriteBackupFile(databaseName, "This is my Backup Test Output");
+
+            //Only 1 file will be created always since this test method delete the file after the test
+            string[] files = Directory.GetFiles(lib.GetBackupLocation() + databaseName + @"\");
+            string fileName = Path.GetFileName(files[0]);
+
+            StreamReader reader = new StreamReader(lib.GetBackupLocation() + databaseName + @"\" + fileName);
+            string output = reader.ReadLine();
+            reader.Close();
+
+            Assert.AreEqual("This is my Backup Test Output", output);
+
+            //Delete test file and directory
+            File.Delete(lib.GetBackupLocation() + databaseName + @"\" + fileName);
+            foreach (DirectoryInfo subDirectory in new DirectoryInfo(lib.GetBackupLocation()).GetDirectories()) subDirectory.Delete(true);
+
+            lib = null;
+        }
     }
 }

@@ -9,23 +9,46 @@ namespace MySQLBackupLibrary.Classes
 {
     class BackupWriter : IWriter
     {
+        private readonly ConfigurationHandler configHandler = new ConfigurationHandler();
         private StreamWriter writer;
 
         public string DatabaseName { get; set; }
 
         public void OpenWriter()
         {
-            throw new NotImplementedException();
+            if (writer == null)
+            {
+                string backupLocation = this.configHandler.GetBackupLocation();
+                if (!Directory.Exists(backupLocation + DatabaseName + @"\"))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(backupLocation + DatabaseName + @"\"));
+                }
+
+                DateTime dateTime = DateTime.Now;
+                writer = new StreamWriter(backupLocation + DatabaseName + @"\" + string.Format("{0}_{1}-{2}-{3}_{4}.dump", DatabaseName, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.ToString("HHmm")));
+            }
+            else
+            {
+                CloseWriter();
+                OpenWriter();
+            }
         }
 
         public void Write(string data)
         {
-            throw new NotImplementedException();
+            if (writer != null)
+            {
+                writer.WriteLine(data);
+            }
         }
 
         public void CloseWriter()
         {
-            throw new NotImplementedException();
+            if (writer != null)
+            {
+                writer.Close();
+                writer = null;
+            }
         }
     }
 }
