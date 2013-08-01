@@ -10,12 +10,6 @@ namespace MySQLBackupLibrary.Classes
 {
     class ConfigLocationCreator
     {
-        private readonly string CONFIGURATION_LOCATION = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\";
-        private readonly string DEFAULT_BACKUP_LOCATION = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Backup\";
-
-        public string ConfigurationLocation { get { return this.CONFIGURATION_LOCATION; } }
-        public string DefaultBackupLocation { get{ return this.DEFAULT_BACKUP_LOCATION; } }
-
         /**
          * Constructor
          */
@@ -33,8 +27,8 @@ namespace MySQLBackupLibrary.Classes
          */
         private void BuildCommonApplicationDataLocation()
         {
-            if (!Directory.Exists(CONFIGURATION_LOCATION)) { Directory.CreateDirectory(Path.GetDirectoryName(CONFIGURATION_LOCATION)); }
-            if (!Directory.Exists(DEFAULT_BACKUP_LOCATION)) { Directory.CreateDirectory(Path.GetDirectoryName(DEFAULT_BACKUP_LOCATION)); }
+            if (!Directory.Exists(Utilities.CONFIGURATION_LOCATION)) { Directory.CreateDirectory(Path.GetDirectoryName(Utilities.CONFIGURATION_LOCATION)); }
+            if (!Directory.Exists(Utilities.DEFAULT_BACKUP_LOCATION)) { Directory.CreateDirectory(Path.GetDirectoryName(Utilities.DEFAULT_BACKUP_LOCATION)); }
         }
 
         /**
@@ -42,8 +36,8 @@ namespace MySQLBackupLibrary.Classes
          */
         private void BuildConfigurationFiles()
         {
-            if (!File.Exists(CONFIGURATION_LOCATION + "Configuration.xml")) { CreateNewConfigurationFile(); }
-            if (!File.Exists(CONFIGURATION_LOCATION + "Databases.xml")) { CreateNewDatabasesFile(); }
+            if (!File.Exists(Utilities.CONFIGURATION_LOCATION + "Configuration.xml")) { CreateNewConfigurationFile(); }
+            if (!File.Exists(Utilities.CONFIGURATION_LOCATION + "Databases.xml")) { CreateNewDatabasesFile(); }
         }
 
         /**
@@ -63,7 +57,7 @@ namespace MySQLBackupLibrary.Classes
 
             //Create BackupLocation node
             XmlNode backupLocationNode = document.CreateElement("BackupLocation");
-            backupLocationNode.AppendChild(document.CreateTextNode(DEFAULT_BACKUP_LOCATION));
+            backupLocationNode.AppendChild(document.CreateTextNode(Utilities.DEFAULT_BACKUP_LOCATION));
             configNode.AppendChild(backupLocationNode);
 
             //Create DeleteBackupsOlderThan node
@@ -71,7 +65,7 @@ namespace MySQLBackupLibrary.Classes
             deleteBackupsOlderThanNode.AppendChild(document.CreateTextNode("7"));
             configNode.AppendChild(deleteBackupsOlderThanNode);
 
-            document.Save(CONFIGURATION_LOCATION + "Configuration.xml");
+            document.Save(Utilities.CONFIGURATION_LOCATION + "Configuration.xml");
         }
 
         /**
@@ -89,7 +83,7 @@ namespace MySQLBackupLibrary.Classes
             XmlNode databasesNode = document.CreateElement("Databases");
             document.AppendChild(databasesNode);
 
-            document.Save(CONFIGURATION_LOCATION + "Databases.xml");
+            document.Save(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
         }
     }
 }

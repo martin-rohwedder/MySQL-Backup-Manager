@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Classes\BackupWriter.cs" />
     <Compile Include="Classes\ConfigLocationCreator.cs" />
+    <Compile Include="Classes\ConfigurationHandler.cs" />
+    <Compile Include="Classes\Utilities.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Classes\IWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
