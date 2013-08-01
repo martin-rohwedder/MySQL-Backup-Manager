@@ -54,5 +54,25 @@ namespace MySQLBackupLibraryTest
             lib.ChangeDeleteBackupsOlderThanDays(7);
             lib = null;
         }
+
+        [TestMethod]
+        public void RetrieveBackupLocationTest()
+        {
+            Library lib = new Library();
+            string backupLocation = lib.GetBackupLocation();
+
+            Assert.AreEqual(@"C:\ProgramData\MySQLBackup\Backup\", backupLocation);
+            lib = null;
+        }
+
+        [TestMethod]
+        public void RetrieveDeleteBackupOlderThanDaysTest()
+        {
+            Library lib = new Library();
+            int days = lib.GetDeleteBackupsOlderThanDays();
+
+            Assert.AreEqual(7, days);
+            lib = null;
+        }
     }
 }

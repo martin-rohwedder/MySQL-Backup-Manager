@@ -42,6 +42,28 @@ namespace MySQLBackupLibrary.Classes
         }
 
         /**
+         * Get the Current Backup Location from the configuration file.
+         */
+        public string GetBackupLocation()
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Configuration.xml");
+            XmlNode backupLocationNode = document.SelectSingleNode("Configuration/BackupLocation");
+            return backupLocationNode.InnerText;
+        }
+
+        /**
+         * Get the current Delete Backups Older Than N Days value, from the configurations file.
+         */
+        public uint GetDeleteBackupsOlderThanDays()
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Configuration.xml");
+            XmlNode deleteBackupsOlderThanNode = document.SelectSingleNode("Configuration/DeleteBackupsOlderThan");
+            return Convert.ToUInt32(deleteBackupsOlderThanNode.InnerText);
+        }
+
+        /**
          * Create a new directory
          */
         private void CreateNewDirectory(string location)

@@ -29,11 +29,27 @@ namespace MySQLBackupLibrary
         }
 
         /**
+         * Retrieve the Backup Location from the configuration file.
+         */
+        public string GetBackupLocation()
+        {
+            return configHandler.GetBackupLocation();
+        }
+
+        /**
          * Modify the Delete Backups Older Than Days. If 0 days is specified, then backups will never be deleted.
          */
         public void ChangeDeleteBackupsOlderThanDays(uint days)
         {
             configHandler.ModifyDeleteBackupsOlderThan(days);
+        }
+
+        /**
+         * Retrieve the Delete Backups Older Than N Days from the configuration file.
+         */
+        public int GetDeleteBackupsOlderThanDays()
+        {
+            return (int) configHandler.GetDeleteBackupsOlderThanDays();
         }
     }
 }
