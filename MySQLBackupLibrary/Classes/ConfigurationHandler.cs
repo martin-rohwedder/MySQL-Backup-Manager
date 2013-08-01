@@ -10,6 +10,9 @@ namespace MySQLBackupLibrary.Classes
 {
     class ConfigurationHandler
     {
+        /**
+         * Modify Backup Location
+         */
         public void ModifyBackupLocation(string location)
         {
             XmlDocument document = new XmlDocument();
@@ -25,6 +28,22 @@ namespace MySQLBackupLibrary.Classes
             CreateNewDirectory(backupLocationNode.InnerText);
         }
 
+        /**
+         * Modify the delete backups older than days. 0 respresent that there will never be deleted any backups.
+         */
+        public void ModifyDeleteBackupsOlderThan(uint days)
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Configuration.xml");
+            XmlNode deleteBackupsOlderThanNode = document.SelectSingleNode("Configuration/DeleteBackupsOlderThan");
+
+            deleteBackupsOlderThanNode.InnerText = Convert.ToString(days);
+            document.Save(Utilities.CONFIGURATION_LOCATION + "Configuration.xml");
+        }
+
+        /**
+         * Create a new directory
+         */
         private void CreateNewDirectory(string location)
         {
             if (!Directory.Exists(location)) { Directory.CreateDirectory(Path.GetDirectoryName(location)); }

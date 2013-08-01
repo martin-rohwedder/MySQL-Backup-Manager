@@ -20,9 +20,20 @@ namespace MySQLBackupLibrary
             ConfigLocationCreator configLocationCreator = new ConfigLocationCreator();
         }
 
+        /**
+         * Modify the Backup Location, where backups are saved.
+         */
         public void ChangeBackupLocation(string location)
         {
             configHandler.ModifyBackupLocation(location);
+        }
+
+        /**
+         * Modify the Delete Backups Older Than Days. If 0 days is specified, then backups will never be deleted.
+         */
+        public void ChangeDeleteBackupsOlderThanDays(uint days)
+        {
+            configHandler.ModifyDeleteBackupsOlderThan(days);
         }
     }
 }

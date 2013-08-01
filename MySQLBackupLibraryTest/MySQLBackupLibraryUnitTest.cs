@@ -39,5 +39,20 @@ namespace MySQLBackupLibraryTest
             lib.ChangeBackupLocation(@"C:\ProgramData\MySQLBackup\Backup\");
             lib = null;
         }
+
+        [TestMethod]
+        public void ModifyDeleteBackupsOlderThanDaysTest()
+        {
+            Library lib = new Library();
+            lib.ChangeDeleteBackupsOlderThanDays(14);
+
+            XmlDocument document = new XmlDocument();
+            document.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Configuration.xml");
+            XmlNode deleteBackupsOlderThanNode = document.SelectSingleNode("Configuration/DeleteBackupsOlderThan");
+
+            Assert.AreEqual("14", deleteBackupsOlderThanNode.InnerText);
+            lib.ChangeDeleteBackupsOlderThanDays(7);
+            lib = null;
+        }
     }
 }
