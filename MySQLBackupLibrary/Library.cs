@@ -10,6 +10,7 @@ namespace MySQLBackupLibrary
     public class Library
     {
         private readonly ConfigurationHandler configHandler = new ConfigurationHandler();
+        private readonly DatabasesHandler databasesHandler = new DatabasesHandler();
 
         /**
          * Constructor
@@ -65,6 +66,11 @@ namespace MySQLBackupLibrary
             backupWriter.CloseWriter();
 
             backupWriter = null;
+        }
+
+        public void InsertDatabaseNode(DatabaseInfo databaseInfo)
+        {
+            databasesHandler.InsertNewDatabaseNode(databaseInfo);
         }
     }
 }

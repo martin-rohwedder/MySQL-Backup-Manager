@@ -102,5 +102,31 @@ namespace MySQLBackupLibraryTest
 
             lib = null;
         }
+
+        [TestMethod]
+        public void InsertNewDatabaseNodeToDatabasesXMLFileTest()
+        {
+            Library lib = new Library();
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            dbInfo.DatabaseName = "test_database";
+            dbInfo.StartTimeHour = 4;
+            dbInfo.StartTimeMinute = 30;
+
+            lib.InsertDatabaseNode(dbInfo);
+
+            XmlDocument document = new XmlDocument();
+            document.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
+            XmlNode startTimeNode = document.SelectSingleNode("Databases/Database/BackupSettings/StartTime");
+
+            Assert.AreEqual("04:30:00", startTimeNode.InnerText);
+
+            //remove the database node we just created
+            XmlNode databaseNode = document.SelectSingleNode("Databases/Database");
+            databaseNode.ParentNode.RemoveChild(databaseNode);
+            document.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
+        }
     }
 }
