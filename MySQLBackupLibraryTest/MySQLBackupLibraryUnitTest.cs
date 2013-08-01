@@ -36,6 +36,10 @@ namespace MySQLBackupLibraryTest
             XmlNode backupLocationNode = document.SelectSingleNode("Configuration/BackupLocation");
 
             Assert.AreEqual(@"C:\MyTestBackupLocation\", backupLocationNode.InnerText);
+
+            //Delete the test directory
+            Directory.Delete(@"C:\MyTestBackupLocation\");
+
             lib.ChangeBackupLocation(@"C:\ProgramData\MySQLBackup\Backup\");
             lib = null;
         }
