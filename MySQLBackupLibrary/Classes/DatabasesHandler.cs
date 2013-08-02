@@ -17,7 +17,7 @@ namespace MySQLBackupLibrary.Classes
             //Create the database node
             XmlNode databaseNode = document.CreateNode(XmlNodeType.Element, "Database", null);
             XmlAttribute databaseNameAttr = document.CreateAttribute("Name");
-            databaseNameAttr.InnerText = databaseInfo.DatabaseName;
+            databaseNameAttr.InnerText = databaseInfo.DatabaseName.ToLower();
             databaseNode.Attributes.Append(databaseNameAttr);
 
             //Create the Host node
@@ -50,6 +50,24 @@ namespace MySQLBackupLibrary.Classes
             document.DocumentElement.AppendChild(databaseNode);
 
             //Save the Databases file
+            document.Save(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
+        }
+
+        /**
+         * Remove a database node from the Databases.xml file according to the provided database name
+         */
+        public void RemoveExistingDatabaseNode(string databaseName)
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
+
+            //Fetch the database node if present and remove it
+            XmlNode databaseNode = document.SelectSingleNode("Databases/Database[@Name='" + databaseName.ToLower() + "']");
+            if (databaseNode != null)
+            {
+                databaseNode.ParentNode.RemoveChild(databaseNode);
+            }
+
             document.Save(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
         }
     }

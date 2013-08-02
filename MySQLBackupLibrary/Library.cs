@@ -68,9 +68,20 @@ namespace MySQLBackupLibrary
             backupWriter = null;
         }
 
+        /**
+         * Insert a new Database node to the Databases.xml file
+         */
         public void InsertDatabaseNode(DatabaseInfo databaseInfo)
         {
             databasesHandler.InsertNewDatabaseNode(databaseInfo);
+        }
+
+        /**
+         * Remove a specific database node from the Databases.xml file according to the database name provided.
+         */
+        public void RemoveDatabaseNode(string databaseName)
+        {
+            databasesHandler.RemoveExistingDatabaseNode(databaseName);
         }
     }
 }

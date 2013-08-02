@@ -128,5 +128,27 @@ namespace MySQLBackupLibraryTest
             databaseNode.ParentNode.RemoveChild(databaseNode);
             document.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
         }
+
+        [TestMethod]
+        public void RemoveSpecificDatabaseNodeTest()
+        {
+            Library lib = new Library();
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            dbInfo.DatabaseName = "TestDatabase";
+            dbInfo.StartTimeHour = 4;
+            dbInfo.StartTimeMinute = 30;
+
+            lib.InsertDatabaseNode(dbInfo);
+            lib.RemoveDatabaseNode(dbInfo.DatabaseName);
+
+            XmlDocument document = new XmlDocument();
+            document.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
+            XmlNode databaseNode = document.SelectSingleNode("Databases/Database[@Name='" + dbInfo.DatabaseName + "']");
+
+            Assert.IsNull(databaseNode);
+        }
     }
 }
