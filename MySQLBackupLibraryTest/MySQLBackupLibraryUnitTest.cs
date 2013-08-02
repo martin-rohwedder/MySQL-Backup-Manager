@@ -127,6 +127,8 @@ namespace MySQLBackupLibraryTest
             //remove the database node we just created
             databaseNode.ParentNode.RemoveChild(databaseNode);
             document.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
+
+            lib = null;
         }
 
         [TestMethod]
@@ -149,6 +151,29 @@ namespace MySQLBackupLibraryTest
             XmlNode databaseNode = document.SelectSingleNode("Databases/Database[@Name='" + dbInfo.DatabaseName + "']");
 
             Assert.IsNull(databaseNode);
+            lib = null;
+        }
+
+        [TestMethod]
+        public void RetrieveSpecificDatabaseNodeTest()
+        {
+            Library lib = new Library();
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            dbInfo.DatabaseName = "TestDatabase";
+            dbInfo.StartTimeHour = 4;
+            dbInfo.StartTimeMinute = 30;
+
+            lib.InsertDatabaseNode(dbInfo);
+
+            DatabaseInfo dbInfo2 = lib.RetrieveDatabaseNode(dbInfo.DatabaseName);
+
+            Assert.AreEqual("testdatabase", dbInfo2.DatabaseName);
+
+            lib.RemoveDatabaseNode(dbInfo2.DatabaseName);
+            lib = null;
         }
     }
 }

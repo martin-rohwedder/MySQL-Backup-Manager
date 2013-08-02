@@ -83,5 +83,13 @@ namespace MySQLBackupLibrary
         {
             databasesHandler.RemoveExistingDatabaseNode(databaseName);
         }
+
+        /**
+         * Get a specific database node as a DatabaseInfo object
+         */
+        public DatabaseInfo RetrieveDatabaseNode(string databaseName)
+        {
+            return databasesHandler.GetSpecificDatabaseNode(databaseName);
+        }
     }
 }

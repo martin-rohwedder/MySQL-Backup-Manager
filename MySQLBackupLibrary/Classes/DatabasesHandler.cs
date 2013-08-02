@@ -70,5 +70,38 @@ namespace MySQLBackupLibrary.Classes
 
             document.Save(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
         }
+
+        /**
+         * Fetch a specific database node, as a DatabaseInfo Object. Null is returned if
+         * no matching database node was found
+         */
+        public DatabaseInfo GetSpecificDatabaseNode(string databaseName)
+        {
+            DatabaseInfo dbInfo = null;
+
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
+
+            //Fetch the database node if present
+            XmlNode databaseNode = document.SelectSingleNode("Databases/Database[@Name='" + databaseName.ToLower() + "']");
+
+            if (databaseNode != null)
+            {
+                dbInfo = new DatabaseInfo();
+                dbInfo.DatabaseName = databaseName.ToLower();
+                dbInfo.Host = databaseNode["Host"].InnerText;
+                dbInfo.User = databaseNode["User"].InnerText;
+                dbInfo.Password = databaseNode["Password"].InnerText;
+
+                XmlNode backupSettingsNode = databaseNode["BackupSettings"];
+
+                string startTime = backupSettingsNode["StartTime"].InnerText;
+                string[] timeSplit = startTime.Split(':');
+                dbInfo.StartTimeHour = Convert.ToInt32(timeSplit[0]);
+                dbInfo.StartTimeMinute = Convert.ToInt32(timeSplit[1]);;
+            }
+
+            return dbInfo;
+        }
     }
 }
