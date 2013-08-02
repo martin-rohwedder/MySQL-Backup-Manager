@@ -119,12 +119,12 @@ namespace MySQLBackupLibraryTest
 
             XmlDocument document = new XmlDocument();
             document.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
-            XmlNode startTimeNode = document.SelectSingleNode("Databases/Database/BackupSettings/StartTime");
+            XmlNode databaseNode = document.SelectSingleNode("Databases/Database");
+            string databaseNameAttr = databaseNode.Attributes["Name"].Value;
 
-            Assert.AreEqual("04:30:00", startTimeNode.InnerText);
+            Assert.AreEqual("test_database", databaseNameAttr);
 
             //remove the database node we just created
-            XmlNode databaseNode = document.SelectSingleNode("Databases/Database");
             databaseNode.ParentNode.RemoveChild(databaseNode);
             document.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Configuration\Databases.xml");
         }

@@ -16,6 +16,9 @@ namespace MySQLBackupLibrary.Classes
 
             //Create the database node
             XmlNode databaseNode = document.CreateNode(XmlNodeType.Element, "Database", null);
+            XmlAttribute databaseNameAttr = document.CreateAttribute("Name");
+            databaseNameAttr.InnerText = databaseInfo.DatabaseName;
+            databaseNode.Attributes.Append(databaseNameAttr);
 
             //Create the Host node
             XmlNode hostNode = document.CreateElement("Host");
@@ -31,11 +34,6 @@ namespace MySQLBackupLibrary.Classes
             XmlNode passwordNode = document.CreateElement("Password");
             passwordNode.InnerText = databaseInfo.Password;
             databaseNode.AppendChild(passwordNode);
-
-            //Create the Database Name Node
-            XmlNode databaseNameNode = document.CreateElement("DatabaseName");
-            databaseNameNode.InnerText = databaseInfo.DatabaseName;
-            databaseNode.AppendChild(databaseNameNode);
 
             //Create the Backup Settings Node
             XmlNode backupSettingsNode = document.CreateNode(XmlNodeType.Element, "BackupSettings", null);
