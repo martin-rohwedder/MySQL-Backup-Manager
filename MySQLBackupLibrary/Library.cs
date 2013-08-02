@@ -91,5 +91,14 @@ namespace MySQLBackupLibrary
         {
             return databasesHandler.GetSpecificDatabaseNode(databaseName);
         }
+
+        /**
+         * Update an existing database node. Database Name is the only thing, which can't be updated.
+         * If this is the case create a new database node instead.
+         */
+        public void UpdateDatabaseNode(DatabaseInfo dbInfo)
+        {
+            databasesHandler.UpdateDatabaseNode(dbInfo);
+        }
     }
 }

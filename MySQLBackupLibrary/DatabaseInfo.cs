@@ -29,7 +29,7 @@ namespace MySQLBackupLibrary
         {
             set
             {
-                startTimeMinute = (value < 0 || value > 60) ? 0 : value;
+                startTimeMinute = (value < 0 || value > 59) ? 0 : value;
             }
         }
     }

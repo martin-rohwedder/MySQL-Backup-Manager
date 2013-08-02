@@ -103,5 +103,14 @@ namespace MySQLBackupLibrary.Classes
 
             return dbInfo;
         }
+
+        /**
+         * Update an existing database node.
+         */
+        public void UpdateDatabaseNode(DatabaseInfo dbInfo)
+        {
+            this.RemoveExistingDatabaseNode(dbInfo.DatabaseName);
+            this.InsertNewDatabaseNode(dbInfo);
+        }
     }
 }

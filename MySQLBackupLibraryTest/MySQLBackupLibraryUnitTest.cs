@@ -175,5 +175,30 @@ namespace MySQLBackupLibraryTest
             lib.RemoveDatabaseNode(dbInfo2.DatabaseName);
             lib = null;
         }
+
+        [TestMethod]
+        public void UpdateSpecificDatabaseNodeTest()
+        {
+            Library lib = new Library();
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            dbInfo.DatabaseName = "TestDatabase";
+            dbInfo.StartTimeHour = 4;
+            dbInfo.StartTimeMinute = 30;
+
+            lib.InsertDatabaseNode(dbInfo);
+
+            //modify the dbInfo start time
+            dbInfo.StartTimeHour = 22;
+            dbInfo.StartTimeMinute = 59;
+
+            lib.UpdateDatabaseNode(dbInfo);
+
+            Assert.AreEqual("22:59:00", dbInfo.StartTime.ToString());
+
+            lib.RemoveDatabaseNode(dbInfo.DatabaseName);
+        }
     }
 }
