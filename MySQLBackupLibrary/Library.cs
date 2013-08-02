@@ -100,5 +100,33 @@ namespace MySQLBackupLibrary
         {
             databasesHandler.UpdateDatabaseNode(dbInfo);
         }
+
+        /**
+         * Log a Message. Type indicates the importance of the message. Usually you'll use Information, Warning or error as the type.
+         */
+        public void LogMessage(string type, string message)
+        {
+            LogWriter logWriter = new LogWriter();
+            logWriter.Type = type;
+
+            logWriter.OpenWriter();
+            logWriter.Write(message);
+            logWriter.CloseWriter();
+        }
+
+        /**
+         * Log a Message. Type indicates the importance of the message. Usually you'll use Information, Warning or error as the type.
+         * Location should be the path where you want to save the log file.
+         */
+        public void LogMessage(string type, string message, string location)
+        {
+            LogWriter logWriter = new LogWriter();
+            logWriter.Type = type;
+            logWriter.LogLocation = location;
+
+            logWriter.OpenWriter();
+            logWriter.Write(message);
+            logWriter.CloseWriter();
+        }
     }
 }

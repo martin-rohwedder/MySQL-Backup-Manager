@@ -43,6 +43,7 @@
     <Compile Include="Classes\ConfigLocationCreator.cs" />
     <Compile Include="Classes\ConfigurationHandler.cs" />
     <Compile Include="Classes\DatabasesHandler.cs" />
+    <Compile Include="Classes\LogWriter.cs" />
     <Compile Include="Classes\Utilities.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Library.cs" />
