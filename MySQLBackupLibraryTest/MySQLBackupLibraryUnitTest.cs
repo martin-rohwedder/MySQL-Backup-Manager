@@ -260,5 +260,13 @@ namespace MySQLBackupLibraryTest
             lib.RemoveDatabaseNode("TestDatabase");
             lib = null;
         }
+
+        [TestMethod]
+        public void GetConfigRootLocationTest()
+        {
+            Library lib = new Library();
+            Assert.AreEqual(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\", lib.GetConfigRootLocation());
+            lib = null;
+        }
     }
 }

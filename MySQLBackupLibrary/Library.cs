@@ -133,5 +133,10 @@ namespace MySQLBackupLibrary
             logWriter.Write(message);
             logWriter.CloseWriter();
         }
+
+        public string GetConfigRootLocation()
+        {
+            return Utilities.ROOT_LOCATION;
+        }
     }
 }
