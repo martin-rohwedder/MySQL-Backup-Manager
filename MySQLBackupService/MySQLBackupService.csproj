@@ -76,6 +76,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MySQLBackupLibrary\MySQLBackupLibrary.csproj">
+      <Project>{019f9be8-e8a9-43b3-b43d-02e29f00e403}</Project>
+      <Name>MySQLBackupLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

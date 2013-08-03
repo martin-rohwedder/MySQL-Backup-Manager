@@ -237,5 +237,28 @@ namespace MySQLBackupLibraryTest
 
             lib = null;
         }
+
+        [TestMethod]
+        public void RetrieveAllDatabaseNodesTest()
+        {
+            Library lib = new Library();
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            dbInfo.DatabaseName = "TestDatabase";
+            dbInfo.StartTimeHour = 4;
+            dbInfo.StartTimeMinute = 30;
+
+            lib.InsertDatabaseNode(dbInfo);
+            dbInfo.DatabaseName = "NewDatabase";
+            lib.InsertDatabaseNode(dbInfo);
+
+            Assert.AreEqual(2, lib.RetrieveAllDatabaseNodes().Count);
+
+            lib.RemoveDatabaseNode(dbInfo.DatabaseName);
+            lib.RemoveDatabaseNode("TestDatabase");
+            lib = null;
+        }
     }
 }

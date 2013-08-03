@@ -98,10 +98,39 @@ namespace MySQLBackupLibrary.Classes
                 string startTime = backupSettingsNode["StartTime"].InnerText;
                 string[] timeSplit = startTime.Split(':');
                 dbInfo.StartTimeHour = Convert.ToInt32(timeSplit[0]);
-                dbInfo.StartTimeMinute = Convert.ToInt32(timeSplit[1]);;
+                dbInfo.StartTimeMinute = Convert.ToInt32(timeSplit[1]);
             }
 
             return dbInfo;
+        }
+
+        public List<DatabaseInfo> GetAllDatabaseNodes()
+        {
+            List<DatabaseInfo> databaseList = new List<DatabaseInfo>();
+
+            XmlDocument document = new XmlDocument();
+            document.Load(Utilities.CONFIGURATION_LOCATION + "Databases.xml");
+
+            XmlNodeList databaseNodeList = document.SelectNodes("Databases/Database");
+            foreach (XmlNode node in databaseNodeList)
+            {
+                DatabaseInfo dbInfo = new DatabaseInfo();
+                dbInfo.DatabaseName = node.Attributes["Name"].Value;
+                dbInfo.Host = node["Host"].InnerText;
+                dbInfo.User = node["User"].InnerText;
+                dbInfo.Password = node["Password"].InnerText;
+
+                XmlNode backupSettingsNode = node["BackupSettings"];
+
+                string startTime = backupSettingsNode["StartTime"].InnerText;
+                string[] timeSplit = startTime.Split(':');
+                dbInfo.StartTimeHour = Convert.ToInt32(timeSplit[0]);
+                dbInfo.StartTimeMinute = Convert.ToInt32(timeSplit[1]);
+
+                databaseList.Add(dbInfo);
+            }
+
+            return databaseList;
         }
 
         /**
