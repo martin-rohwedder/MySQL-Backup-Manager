@@ -1,4 +1,5 @@
-﻿using MySQLBackupService.Classes;
+﻿using MySQLBackupLibrary;
+using MySQLBackupService.Classes;
 using Quartz;
 using Quartz.Impl;
 using System;
@@ -50,35 +51,13 @@ namespace MySQLBackupService
             scheduler.ScheduleJob(deleteBackupJobDetail, deleteBackupTrigger);   //Schedule Delete Backup Job
 
             //Log Information about the service has started
-            this.Log("The MySQL Backup Service has been started", "INFO");
+            new Library().LogMessage("INFO", "The MySQL Backup Service has been started");
         }
 
         protected override void OnStop()
         {
             //Log Information about the service has stopped
-            this.Log("The MySQL Backup Service has been stopped", "INFO");
-        }
-
-        /**
-         * Log message to the Log.txt file. Type indicates the message type, eg. Error, information etc.
-         */
-        private void Log(string output, string type)
-        {
-            LogWriter logWriter = new LogWriter();
-            try
-            {
-                logWriter.OpenWriter();
-                logWriter.Type = type;
-                logWriter.Write(output);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                logWriter.CloseWriter();
-            }
+            new Library().LogMessage("INFO", "The MySQL Backup Service has been stopped");
         }
     }
 }

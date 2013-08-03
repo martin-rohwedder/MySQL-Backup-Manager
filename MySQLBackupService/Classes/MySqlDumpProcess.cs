@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MySQLBackupLibrary;
 using Quartz;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace MySQLBackupService.Classes
 {
     class MySqlDumpProcess : IJob
     {
+        private readonly Library library = new Library();
+
         //Properties
         public string error { get; set; }
         public string output { get; set; }
@@ -23,13 +26,12 @@ namespace MySQLBackupService.Classes
          */
         public void Execute(IJobExecutionContext context)
         {
-            BackupWriter writer = new BackupWriter();
             Process process = null;
             ServerDown = false;
 
             try
             {
-                this.ProcessMySqlDump(process, writer);
+                this.ProcessMySqlDump(process);
             }
             catch (Exception ex)
             {
@@ -37,7 +39,6 @@ namespace MySQLBackupService.Classes
             }
             finally
             {
-                writer.CloseWriter();
                 if (process != null)
                 {
                     process.Close();
@@ -51,31 +52,37 @@ namespace MySQLBackupService.Classes
         /**
          * Process The MySQL Dump for each database
          */
-        private void ProcessMySqlDump(Process process, BackupWriter writer)
+        private void ProcessMySqlDump(Process process)
         {
-            XmlDocument document = new XmlDocument();
-            document.Load("Configuration/Databases.xml");
-
-            XmlNodeList nodeList = document.SelectNodes("Databases/Database");
-            foreach (XmlNode node in nodeList)
+            foreach (DatabaseInfo dbInfo in library.RetrieveAllDatabaseNodes())
             {
                 System.Threading.Thread.Sleep(1000);   //Let Application Sleep for 1 second, preventing multiple backup executions of the same database.
 
                 if (!ServerDown)
                 {
-                    string[] timeArray = node["BackupSettings"].SelectSingleNode("StartTime").InnerText.Split(':');
-
-                    if (Convert.ToInt32(timeArray[0]) == DateTime.Now.Hour && Convert.ToInt32(timeArray[1]) == DateTime.Now.Minute)
+                    string[] startTime = dbInfo.StartTime.ToString().Split(':');
+                    if (Convert.ToInt32(startTime[0]) == DateTime.Now.Hour && Convert.ToInt32(startTime[1]) == DateTime.Now.Minute)
                     {
-                        this.databaseName = node["DatabaseName"].InnerText;
+                        this.databaseName = dbInfo.DatabaseName;
 
                         ProcessStartInfo psi = new ProcessStartInfo();
-                        psi.WorkingDirectory = this.RetrieveMySQLInstallationBinPath();
+
+                        string path = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
+                        if (path == null)
+                        {
+                            Environment.SetEnvironmentVariable("PATH", this.RetrieveMySQLInstallationBinPath(), EnvironmentVariableTarget.User);
+                        }
+                        else if (!path.Contains(this.RetrieveMySQLInstallationBinPath()))
+                        {
+                            path += ";" + this.RetrieveMySQLInstallationBinPath();
+                            Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.User);
+                        }
+
                         psi.FileName = "mysqldump";
                         psi.RedirectStandardInput = false;
                         psi.RedirectStandardOutput = true;
                         psi.RedirectStandardError = true;
-                        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", node["User"].InnerText, node["Password"].InnerText, node["Host"].InnerText, this.databaseName);
+                        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", dbInfo.User, dbInfo.Password, dbInfo.Host, this.databaseName);
                         psi.UseShellExecute = false;
                         psi.CreateNoWindow = true;
 
@@ -86,10 +93,8 @@ namespace MySQLBackupService.Classes
 
                         if (!this.HasErrorOccured(this.error))
                         {
-                            writer.DatabaseName = this.databaseName;
-                            writer.OpenWriter();
-                            writer.Write(this.output);
-                            this.Log("Database backup created of the database " + this.databaseName, "INFO");
+                            library.WriteBackupFile(this.databaseName, this.output);
+                            library.LogMessage("INFO", "Backup created of the database " + this.databaseName);
                         }
                     }
                 }
@@ -129,52 +134,30 @@ namespace MySQLBackupService.Classes
             //Can't find database error
             if (errorOutput.Contains("Got error: 1049"))
             {
-                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 1049")), "ERROR");
+                library.LogMessage("ERROR", errorOutput.Substring(errorOutput.IndexOf("Got error: 1049")));
                 errorOccured = true;
             }
             //Can't find host error
             else if (errorOutput.Contains("Got error: 2005"))
             {
-                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2005")), "ERROR");
+                library.LogMessage("ERROR", errorOutput.Substring(errorOutput.IndexOf("Got error: 2005")));
                 errorOccured = true;
             }
             //Wrong user/password error
             else if (errorOutput.Contains("Got error: 1045"))
             {
-                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 1045")), "ERROR");
+                library.LogMessage("ERROR", errorOutput.Substring(errorOutput.IndexOf("Got error: 1045")));
                 errorOccured = true;
             }
             //Can't connect to MySQL (probably is server down)
             else if (errorOutput.Contains("Got error: 2003"))
             {
-                this.Log(errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")).TrimEnd('\r', '\n'), "ERROR");
+                library.LogMessage("ERROR", errorOutput.Substring(errorOutput.IndexOf("Got error: 2003")).TrimEnd('\r', '\n'));
                 this.ServerDown = true;
                 errorOccured = true;
             }
 
             return errorOccured;
-        }
-
-        /**
-         * Log message to the Log.txt file. Type indicates the message type, eg. Error, information etc.
-         */
-        private void Log(string output, string type)
-        {
-            LogWriter logWriter = new LogWriter();
-            try
-            {
-                logWriter.OpenWriter();
-                logWriter.Type = type;
-                logWriter.Write(output);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                logWriter.CloseWriter();
-            }
         }
     }
 }
