@@ -10,7 +10,7 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Databases" Source="/Pages/DatabasesPage.xaml" />
                 <mui:Link DisplayName="About" Source="/Pages/AboutPage.xaml" />
-                <mui:Link DisplayName="Help" />
+                <mui:Link DisplayName="Help" Source="/Pages/HelpPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupName="settings">
