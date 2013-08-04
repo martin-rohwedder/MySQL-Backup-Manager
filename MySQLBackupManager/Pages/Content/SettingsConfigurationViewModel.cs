@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySQLBackupManager.Pages.Commands;
 
 namespace MySQLBackupManager.Pages.Content
 {
@@ -18,6 +19,8 @@ namespace MySQLBackupManager.Pages.Content
 
         public SettingsConfigurationViewModel()
         {
+            ChangeLocationButton = new ButtonClickCommand(this.ChangeBackupLocationClickEvent);
+
             SyncFromConfiguration();
         }
 
@@ -54,6 +57,19 @@ namespace MySQLBackupManager.Pages.Content
 
                 //Save the modification in the Configurations File.
                 library.ChangeDeleteBackupsOlderThanDays(Convert.ToUInt32(this.deleteBackupAfterDays));
+            }
+        }
+
+        public ButtonClickCommand ChangeLocationButton { get; set; }
+
+        private void ChangeBackupLocationClickEvent()
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                this.BackupLocation = dialog.SelectedPath;
             }
         }
     }
