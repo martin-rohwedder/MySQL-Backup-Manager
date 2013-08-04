@@ -18,6 +18,8 @@ namespace MySQLBackupService
 {
     public partial class MySQLBackupService : ServiceBase
     {
+        private readonly Library library = new Library();
+
         public string error { get; set; }
         public string output { get; set; }
         public string databaseName { get; set; }
@@ -30,6 +32,28 @@ namespace MySQLBackupService
 
         public void onDebug()
         {
+            DatabaseInfo dbInfo = new DatabaseInfo();
+            dbInfo.DatabaseName = "movstreamdb";
+            dbInfo.Host = "localhost";
+            dbInfo.User = "test";
+            dbInfo.Password = "secret";
+            int minute = DateTime.Now.Minute;
+            int hour = DateTime.Now.Hour;
+            if (minute + 1 > 59)
+            {
+                dbInfo.StartTimeMinute = 0;
+                if (hour == 23)
+                {
+                    dbInfo.StartTimeHour = 0;
+                }
+            }
+            else
+            {
+                dbInfo.StartTimeHour = hour;
+                dbInfo.StartTimeMinute = minute + 1;
+            }
+            library.InsertDatabaseNode(dbInfo);
+
             this.OnStart(null);
         }
 
@@ -57,7 +81,7 @@ namespace MySQLBackupService
         protected override void OnStop()
         {
             //Log Information about the service has stopped
-            new Library().LogMessage("INFO", "The MySQL Backup Service has been stopped");
+            library.LogMessage("INFO", "The MySQL Backup Service has been stopped");
         }
     }
 }
