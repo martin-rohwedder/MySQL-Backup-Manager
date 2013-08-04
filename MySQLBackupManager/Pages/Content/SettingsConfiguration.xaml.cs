@@ -23,6 +23,8 @@ namespace MySQLBackupManager.Pages.Content
         public SettingsConfiguration()
         {
             InitializeComponent();
+
+            this.DataContext = new SettingsConfigurationViewModel();
         }
     }
 }
