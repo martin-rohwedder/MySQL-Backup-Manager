@@ -9,7 +9,7 @@
         <mui:LinkGroup DisplayName="MySQL Backup Manager">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Databases" Source="/Pages/DatabasesPage.xaml" />
-                <mui:Link DisplayName="About" />
+                <mui:Link DisplayName="About" Source="/Pages/AboutPage.xaml" />
                 <mui:Link DisplayName="Help" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
