@@ -129,12 +129,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MySQLBackupService\MySQLBackupService.csproj">
-      <Project>{25d6aaac-a807-40a3-bd21-773e5a7bf0d6}</Project>
-      <Name>MySQLBackupService</Name>
+    <ProjectReference Include="..\MySQLBackupLibrary\MySQLBackupLibrary.csproj">
+      <Project>{019f9be8-e8a9-43b3-b43d-02e29f00e403}</Project>
+      <Name>MySQLBackupLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Icons\MySQLBackupManager-System-Tray-Icon.ico" />
   </ItemGroup>
