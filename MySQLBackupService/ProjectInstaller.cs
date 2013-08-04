@@ -30,16 +30,16 @@ namespace MySQLBackupService
         private void CheckUserPathVariable()
         {
             Library library = new Library();
-            string path = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
+            string path = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine);
             if (path == null)
             {
-                Environment.SetEnvironmentVariable("PATH", library.GetMySQLBinLocation(), EnvironmentVariableTarget.User);
+                Environment.SetEnvironmentVariable("PATH", library.GetMySQLBinLocation(), EnvironmentVariableTarget.Machine);
                 //this.RestartService();
             }
             else if (!path.Contains(library.GetMySQLBinLocation()))
             {
                 path += ";" + library.GetMySQLBinLocation();
-                Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.User);
+                Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Machine);
                 //this.RestartService();
             }
         }
