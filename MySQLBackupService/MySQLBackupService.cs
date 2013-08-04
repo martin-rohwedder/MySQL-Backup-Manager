@@ -32,6 +32,14 @@ namespace MySQLBackupService
 
         public void onDebug()
         {
+            if (library.RetrieveAllDatabaseNodes().Count > 0)
+            {
+                foreach (DatabaseInfo dbNode in library.RetrieveAllDatabaseNodes())
+                {
+                    library.RemoveDatabaseNode(dbNode.DatabaseName);
+                }
+            }
+
             DatabaseInfo dbInfo = new DatabaseInfo();
             dbInfo.DatabaseName = "movstreamdb";
             dbInfo.Host = "localhost";
@@ -42,9 +50,14 @@ namespace MySQLBackupService
             if (minute + 1 > 59)
             {
                 dbInfo.StartTimeMinute = 0;
-                if (hour == 23)
+                hour++;
+                if (hour > 23)
                 {
                     dbInfo.StartTimeHour = 0;
+                }
+                else
+                {
+                    dbInfo.StartTimeHour = hour;
                 }
             }
             else
