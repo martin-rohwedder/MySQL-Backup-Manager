@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Configuration>
-  <!-- the Path where to save backup files. eg. C:\backup -->
-  <BackupPath></BackupPath>
-  
-  <!-- Delete backups older than 'n' days -->
-  <DeleteBackupsOlderThan>7</DeleteBackupsOlderThan>
-</Configuration>

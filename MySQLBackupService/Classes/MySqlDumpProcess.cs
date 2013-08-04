@@ -66,18 +66,6 @@ namespace MySQLBackupService.Classes
                         this.databaseName = dbInfo.DatabaseName;
 
                         ProcessStartInfo psi = new ProcessStartInfo();
-
-                        string path = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
-                        if (path == null)
-                        {
-                            Environment.SetEnvironmentVariable("PATH", this.RetrieveMySQLInstallationBinPath(), EnvironmentVariableTarget.User);
-                        }
-                        else if (!path.Contains(this.RetrieveMySQLInstallationBinPath()))
-                        {
-                            path += ";" + this.RetrieveMySQLInstallationBinPath();
-                            Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.User);
-                        }
-
                         psi.FileName = "mysqldump";
                         psi.RedirectStandardInput = false;
                         psi.RedirectStandardOutput = true;
@@ -104,24 +92,6 @@ namespace MySQLBackupService.Classes
                     process.WaitForExit();
                 }
             }
-        }
-
-        /**
-         * Lookup the MySQL Installation Bin path from the registry
-         */
-        private string RetrieveMySQLInstallationBinPath()
-        {
-            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MySQL AB");
-            foreach (string subkey in registryKey.GetSubKeyNames())
-            {
-                if (subkey.ToLower().Contains("mysql server"))
-                {
-                    RegistryKey myKey = registryKey.OpenSubKey(subkey);
-                    string location = (string)myKey.GetValue("Location");
-                    return location + @"bin\";
-                }
-            }
-            return null;
         }
 
         /**
