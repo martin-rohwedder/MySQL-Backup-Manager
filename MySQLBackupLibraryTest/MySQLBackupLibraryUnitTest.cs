@@ -268,5 +268,13 @@ namespace MySQLBackupLibraryTest
             Assert.AreEqual(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\", lib.GetConfigRootLocation());
             lib = null;
         }
+
+        [TestMethod]
+        public void GetMySQLBinPathTest()
+        {
+            Library lib = new Library();
+            Assert.IsTrue(lib.GetMySQLBinLocation().ToLower().Contains("mysql server"));
+            lib = null;
+        }
     }
 }

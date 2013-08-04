@@ -138,5 +138,13 @@ namespace MySQLBackupLibrary
         {
             return Utilities.ROOT_LOCATION;
         }
+
+        /**
+         * Get the location of the bin where MySQL is installed. The Location is looked up from the registry. Returns null if nothing is found.
+         */
+        public string GetMySQLBinLocation()
+        {
+            return Utilities.RetrieveMySQLInstallationBinPath();
+        }
     }
 }
