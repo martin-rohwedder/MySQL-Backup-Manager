@@ -13,7 +13,7 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Database">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Databases" Source="/Pages/DatabasesPage.xaml" />
+                <mui:Link DisplayName="My Databases" Source="/Pages/DatabasesPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Information">
