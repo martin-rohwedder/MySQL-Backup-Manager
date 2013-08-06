@@ -1,0 +1,29 @@
+﻿<Page x:Class="MySQLBackupManager.Pages.WelcomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="WelcomePage">
+
+    <StackPanel Style="{StaticResource ContentRoot}" Height="Auto">
+        <TextBlock Text="Welcome to MySQL Backup Manager" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
+        
+        <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
+            <TextBlock Text="Welcome to MySQL Backup Manager. This application is a lightweight application, where you can manage which MySQL databases who needs backup. To begin adding a database to the backup procedure, please refer to the database section. In there you can add databases easily." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock Text="It is recommended that you use this program to make changes to settings or add, edit or delete databases set for backups and such things." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock Text="For more help on how to add a database or maybe modify an existing database, please refer to the Help section." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,20">
+                If you have suggestions or compliments to this application, you can always contact me from my website <Hyperlink NavigateUri="http://www.martinrohwedder.dk" RequestNavigate="Hyperlink_RequestNavigate">http://www.martinrohwedder.dk</Hyperlink>
+            </TextBlock>
+
+            <TextBlock Text="Best Regards" TextWrapping="Wrap" Margin="0,0,0,0"></TextBlock>
+
+            <TextBlock Text="Martin Rohwedder" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</Page>

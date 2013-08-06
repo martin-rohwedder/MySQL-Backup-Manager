@@ -9,7 +9,7 @@
 	Title="Databases">
 
     <Grid Style="{StaticResource ContentRoot}">
-        <TextBlock x:Name="MyText" Text="Welcome To my Application" />
+        <Label Content="Select the database you want to edit" FontWeight="Bold"></Label>
     </Grid>
-    
+
 </Page>
