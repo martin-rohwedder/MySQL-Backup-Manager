@@ -6,13 +6,23 @@
     
     <!-- Menu with application links -->
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="MySQL Backup Manager">
+        <mui:LinkGroup DisplayName="Database">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Databases" Source="/Pages/DatabasesPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Information">
+            <mui:LinkGroup.Links>
                 <mui:Link DisplayName="About" Source="/Pages/AboutPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Help">
+            <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Help" Source="/Pages/HelpPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        
+        <!-- Settings tab is a title link -->
         <mui:LinkGroup DisplayName="settings" GroupName="settings">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Application" Source="/Pages/Settings.xaml" />
