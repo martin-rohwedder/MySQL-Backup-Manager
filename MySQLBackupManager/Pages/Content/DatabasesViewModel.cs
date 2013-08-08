@@ -11,25 +11,28 @@ namespace MySQLBackupManager.Pages.Content
     class DatabasesViewModel
     {
         private readonly Library library = new Library();
-        private ObservableCollection<DatabaseInfo> databases;
+        private ObservableCollection<DatabaseInfo> databases = new ObservableCollection<DatabaseInfo>();
+
         public ObservableCollection<DatabaseInfo> Databases
         {
             get
             {
+                foreach (DatabaseInfo dbInfo in library.RetrieveAllDatabaseNodes())
+                {
+                    databases.Add(dbInfo);
+                }
                 return databases;
             }
         }
 
-        public DatabasesViewModel()
+        /**
+         * Add a Database Info object to the collection
+         */
+        public void addDatabase(DatabaseInfo dbInfo)
         {
-            if (databases == null)
-            {
-                databases = new ObservableCollection<DatabaseInfo>();
-            }
-            foreach (DatabaseInfo dbInfo in library.RetrieveAllDatabaseNodes())
-            {
-                databases.Add(dbInfo);
-            }
+            this.databases.Add(dbInfo);
+            library.InsertDatabaseNode(dbInfo);
+            library.LogMessage("INFO", string.Format("The database {0} is now ready for backup", dbInfo.DatabaseName));
         }
     }
 }

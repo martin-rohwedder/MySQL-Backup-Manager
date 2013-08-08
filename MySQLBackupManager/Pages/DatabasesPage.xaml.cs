@@ -27,5 +27,10 @@ namespace MySQLBackupManager.Views
 
             this.DataContext = new DatabasesViewModel();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new DatabasesViewModel();
+        }
     }
 }
