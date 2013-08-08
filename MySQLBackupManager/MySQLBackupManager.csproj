@@ -66,6 +66,7 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Commands\ButtonClickCommand.cs" />
+    <Compile Include="Pages\Content\DatabasesViewModel.cs" />
     <Compile Include="Pages\Content\SettingsAppearance.xaml.cs">
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>

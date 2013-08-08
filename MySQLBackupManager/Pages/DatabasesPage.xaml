@@ -11,9 +11,7 @@
     <StackPanel Style="{StaticResource ContentRoot}">
         <TextBlock Text="The databases here is active and ready for being backed up. If you want to modify a database, double click on it's name in the list below." TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,0,0,20"></TextBlock>
         
-        <ListBox Name="DatabaseListBox">
-            <ListBoxItem Content="Database 1" Padding="5"></ListBoxItem>
-            <ListBoxItem Content="Database 2" Padding="5"></ListBoxItem>
+        <ListBox Name="DatabaseListBox" ItemsSource="{Binding Databases}">
         </ListBox>
     </StackPanel>
 

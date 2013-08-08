@@ -32,5 +32,10 @@ namespace MySQLBackupLibrary
                 startTimeMinute = (value < 0 || value > 59) ? 0 : value;
             }
         }
+
+        public override string ToString()
+        {
+            return DatabaseName;
+        }
     }
 }
