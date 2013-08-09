@@ -13,7 +13,7 @@
         
         <Separator />
         
-        <ListBox x:Name="DatabasesListBox" ItemsSource="{Binding Databases}"/>
+        <ListBox x:Name="DatabasesListBox" ItemsSource="{Binding Databases}" PreviewMouseDoubleClick="DatabasesListBox_PreviewMouseDoubleClick"/>
     </StackPanel>
 
 </Page>

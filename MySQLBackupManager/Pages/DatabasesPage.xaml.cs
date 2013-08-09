@@ -1,4 +1,5 @@
-﻿using MySQLBackupManager.Pages.Content;
+﻿using MySQLBackupLibrary;
+using MySQLBackupManager.Pages.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,18 @@ namespace MySQLBackupManager.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = new DatabasesViewModel();
+        }
+
+        private void DatabasesListBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ItemsControl.ContainerFromElement(DatabasesListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            if (item != null)
+            {
+                FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(item.Content.GetType().ToString(), "Success", MessageBoxButton.OK);
+                DatabaseInfo dbInfo = (DatabaseInfo) item.Content;
+
+                //NavigationCommands.GoToPage.Execute(new Uri("/Pages/AboutPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
+            }
         }
     }
 }
