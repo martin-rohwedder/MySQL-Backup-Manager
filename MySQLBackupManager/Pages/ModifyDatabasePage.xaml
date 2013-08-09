@@ -3,11 +3,56 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="340" d:DesignWidth="300"
 	Title="ModifyDatabasePage">
 
-    <Grid>
-        <TextBlock Text="{Binding CurrentDbInfo}"></TextBlock>
+    <Grid HorizontalAlignment="Left" Style="{StaticResource ContentRoot}">
+        <StackPanel MinWidth="150">
+            <TextBlock Text="MODIFY DATABASE" Grid.Row="0" Grid.Column="0" Style="{StaticResource Heading2}" Margin="0,0,0,8"></TextBlock>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition MinWidth="160"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- Host -->
+                <Label Target="{Binding ElementName=hostTextBox}" Content="Host:" Grid.Row="0" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
+                <TextBox Name="hostTextBox" Grid.Column="1" Grid.Row="0" Margin="0,0,0,8" Text="{Binding CurrentDbInfo.Host, Mode=TwoWay}"></TextBox>
+
+                <!-- Database Name -->
+                <Label Target="{Binding ElementName=databaseTextBox}" Content="Database:" Grid.Row="1" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
+                <TextBox Name="databaseTextBox" Grid.Column="1" Grid.Row="1" Margin="0,0,0,8" Text="{Binding CurrentDbInfo.DatabaseName, Mode=TwoWay}"></TextBox>
+
+                <!-- User -->
+                <Label Target="{Binding ElementName=userTextBox}" Content="User:" Grid.Row="2" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
+                <TextBox Name="userTextBox" Grid.Column="1" Grid.Row="2" Margin="0,0,0,8" Text="{Binding CurrentDbInfo.User, Mode=TwoWay}"></TextBox>
+
+                <!-- Password -->
+                <Label Target="{Binding ElementName=passwordTextBox}" Content="Password:" Grid.Row="3" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
+                <TextBox Name="passwordTextBox" Grid.Column="1" Grid.Row="3" Margin="0,0,0,8" Text="{Binding CurrentDbInfo.Password, Mode=TwoWay}"></TextBox>
+
+                <!-- Start Time -->
+                <Label Target="{Binding ElementName=passwordTextBox}" Content="Start Time:" Grid.Row="4" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
+                <xctk:DateTimeUpDown Grid.Row="4" Grid.Column="1" Format="Custom" Name="startTime" FormatString="HH:mm" Value="{Binding CurrentStartTime, Mode=TwoWay}" Margin="0,0,0,8" Width="70" HorizontalAlignment="Left"></xctk:DateTimeUpDown>
+
+                <Button Content="Modify Database" Grid.Row="5" Grid.Column="1" Margin="0,10"></Button>
+
+                <Button Content="Remove Database" Grid.Row="6" Grid.Column="1" Margin="0,10,0,10"></Button>
+
+            </Grid>
+        </StackPanel>
     </Grid>
+
 </Page>

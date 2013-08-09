@@ -35,6 +35,19 @@ namespace MySQLBackupManager.Pages
             }
         }
 
+        private string currentStartTime;
+        public string CurrentStartTime
+        {
+            get
+            {
+                return this.currentStartTime;
+            }
+            set
+            {
+                this.currentStartTime = value;
+            }
+        }
+
         public ModifyDatabasePage()
         {
             InitializeComponent();
@@ -53,16 +66,13 @@ namespace MySQLBackupManager.Pages
                     FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage("The database requested was not found!", "Not Found", MessageBoxButton.OK);
                     NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
                 }
-                else
-                {
-                    CurrentDbInfo = dbInfo;
-                }
+                CurrentDbInfo = dbInfo;
+                CurrentStartTime = dbInfo.StartTime.ToString();
             }
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            CurrentDbInfo = null;
         }
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
