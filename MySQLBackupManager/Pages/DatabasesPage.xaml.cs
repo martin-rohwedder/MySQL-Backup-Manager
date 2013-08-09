@@ -39,10 +39,8 @@ namespace MySQLBackupManager.Views
             var item = ItemsControl.ContainerFromElement(DatabasesListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
             if (item != null)
             {
-                FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(item.Content.GetType().ToString(), "Success", MessageBoxButton.OK);
                 DatabaseInfo dbInfo = (DatabaseInfo) item.Content;
-
-                //NavigationCommands.GoToPage.Execute(new Uri("/Pages/AboutPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
+                NavigationCommands.GoToPage.Execute(new Uri("/Pages/ModifyDatabasePage.xaml#" + dbInfo.DatabaseName, UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
             }
         }
     }
