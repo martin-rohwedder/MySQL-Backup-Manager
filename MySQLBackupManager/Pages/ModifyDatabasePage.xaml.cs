@@ -22,6 +22,8 @@ namespace MySQLBackupManager.Pages
     /// </summary>
     public partial class ModifyDatabasePage : Page, IContent
     {
+        private readonly Library library = new Library();
+
         private DatabaseInfo currentDbInfo;
         public DatabaseInfo CurrentDbInfo
         {
@@ -59,7 +61,6 @@ namespace MySQLBackupManager.Pages
         {
             if (e.Fragment != "")
             {
-                Library library = new Library();
                 DatabaseInfo dbInfo = library.RetrieveDatabaseNode(e.Fragment);
                 if (dbInfo == null)
                 {
@@ -81,6 +82,27 @@ namespace MySQLBackupManager.Pages
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+        }
+
+        private void ModifyDatabaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            string[] startTimeSplit = startTime.Text.Split(':');
+            CurrentDbInfo.StartTimeHour = Convert.ToInt32(startTimeSplit[0]);
+            CurrentDbInfo.StartTimeMinute = Convert.ToInt32(startTimeSplit[1]);
+            library.UpdateDatabaseNode(CurrentDbInfo);
+
+            NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
+        }
+
+        private void RemoveDatabaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage("Are you sure that you want to remove the database?\nThis action can't be undone!", "Remove Database", MessageBoxButton.YesNo);
+
+            if (result.ToString().ToLower().Equals("yes"))
+            {
+                library.RemoveDatabaseNode(CurrentDbInfo.DatabaseName);
+                NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
+            }
         }
     }
 }

@@ -48,9 +48,9 @@
                 <Label Target="{Binding ElementName=passwordTextBox}" Content="Start Time:" Grid.Row="4" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
                 <xctk:DateTimeUpDown Grid.Row="4" Grid.Column="1" Format="Custom" Name="startTime" FormatString="HH:mm" Value="{Binding CurrentStartTime, Mode=TwoWay}" Margin="0,0,0,8" Width="70" HorizontalAlignment="Left"></xctk:DateTimeUpDown>
 
-                <Button Content="Modify Database" Grid.Row="5" Grid.Column="1" Margin="0,10"></Button>
+                <Button x:Name="ModifyDatabaseButton" Content="Modify Database" Grid.Row="5" Grid.Column="1" Margin="0,10" Click="ModifyDatabaseButton_Click"></Button>
 
-                <Button Content="Remove Database" Grid.Row="6" Grid.Column="1" Margin="0,10,0,10"></Button>
+                <Button x:Name="RemoveDatabaseButton" Content="Remove Database" Grid.Row="6" Grid.Column="1" Margin="0,10,0,10" Click="RemoveDatabaseButton_Click"></Button>
 
             </Grid>
         </StackPanel>
