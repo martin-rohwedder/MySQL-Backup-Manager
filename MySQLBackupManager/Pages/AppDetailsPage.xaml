@@ -1,0 +1,57 @@
+﻿<Page x:Class="MySQLBackupManager.Pages.AppDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="Application Details">
+
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading2}" Text="APPLICATION DETAILS" Margin="0,0,0,20"></TextBlock>
+
+        <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition MinWidth="160"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- Application Name -->
+                <TextBlock Text="Name" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="MySQL Backup Manager" Grid.Row="0" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+
+                <!-- GUI Version Number -->
+                <TextBlock Text="Version (GUI)" FontWeight="SemiBold" Grid.Row="1" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="1.0.0.0" Grid.Row="1" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+
+                <!-- Windows Service version number -->
+                <TextBlock Text="Version (Service)" FontWeight="SemiBold" Grid.Row="2" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="1.0.0.0" Grid.Row="2" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                
+                <!-- Developer -->
+                <TextBlock Text="Developer" FontWeight="SemiBold" Grid.Row="3" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"><Hyperlink NavigateUri="http://www.martinrohwedder.dk" RequestNavigate="Hyperlink_RequestNavigate">Martin Rohwedder</Hyperlink></TextBlock>
+                
+                <!-- Year -->
+                <TextBlock Text="Year" FontWeight="SemiBold" Grid.Row="4" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="2013" Grid.Row="4" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+
+                <!-- Source Code Link -->
+                <TextBlock Text="Source Code" FontWeight="SemiBold" Grid.Row="5" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"><Hyperlink NavigateUri="https://github.com/martin-rohwedder/MySQL-Backup-Manager" RequestNavigate="Hyperlink_RequestNavigate">GitHub page</Hyperlink></TextBlock>
+
+            </Grid>
+
+        </StackPanel>
+    </StackPanel>
+</Page>

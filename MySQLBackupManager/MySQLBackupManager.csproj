@@ -104,6 +104,9 @@
       <DependentUpon>SettingsConfiguration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Content\SettingsConfigurationViewModel.cs" />
+    <Compile Include="Pages\AppDetailsPage.xaml.cs">
+      <DependentUpon>AppDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DatabasesPage.xaml.cs">
       <DependentUpon>DatabasesPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Content\SettingsConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AppDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

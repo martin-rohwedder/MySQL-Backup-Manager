@@ -20,6 +20,7 @@
         <mui:LinkGroup DisplayName="About">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Information" Source="/Pages/AboutPage.xaml" />
+                <mui:Link DisplayName="Application Details" Source="/Pages/AppDetailsPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Help">
