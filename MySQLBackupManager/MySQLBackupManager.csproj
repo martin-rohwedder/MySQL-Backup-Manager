@@ -36,6 +36,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MBM-Desktop.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="FirstFloor.ModernUI">
@@ -219,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\MBM-Desktop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MBM-Desktop.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
