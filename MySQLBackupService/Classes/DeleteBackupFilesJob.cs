@@ -30,10 +30,13 @@ namespace MySQLBackupService.Classes
             int days = library.GetDeleteBackupsOlderThanDays();
             string backupLocation = library.GetBackupLocation();
 
-            //Delete Old Files. Add 1 to number of days, since it has to delete files older than the specified number of days
-            this.ProcessDeleteFiles(backupLocation, days + 1);
+            if (days > 0)
+            {
+                //Delete Old Files. Add 1 to number of days, since it has to delete files older than the specified number of days
+                this.ProcessDeleteFiles(backupLocation, days + 1);
 
-            library.LogMessage("INFO", string.Format("Cleaning up backup files older than {0} days", days));
+                library.LogMessage("INFO", string.Format("Cleaning up backup files older than {0} days", days));
+            }
         }
 
         /**
