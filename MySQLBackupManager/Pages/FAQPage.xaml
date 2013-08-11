@@ -8,7 +8,33 @@
       d:DesignHeight="500" d:DesignWidth="500"
 	Title="FAQ">
 
-    <Grid Style="{StaticResource ContentRoot}">
-        <TextBlock Style="{StaticResource Heading2}" Text="FREQUENTLY ASKED QUESTION"></TextBlock>
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Style="{StaticResource ContentRoot}">
+
+                <TextBlock Style="{StaticResource Heading2}" Text="FREQUENTLY ASKED QUESTION" Margin="0,0,0,20"></TextBlock>
+
+                <!-- How Do I Add A Database? -->
+                <TextBlock Style="{StaticResource Emphasis}" Text="How do I add a database?"></TextBlock>
+                <TextBlock Text="You can add a database and thereby making it ready for being backed up, by selecting the menu 'databases' and the sub menu 'Add Database'." TextWrapping="Wrap" Margin="10,3,0,10"></TextBlock>
+
+                <!-- How Do I Modify An Existing Database? -->
+                <TextBlock Style="{StaticResource Emphasis}" Text="How do I modify an existing database?"></TextBlock>
+                <TextBlock Text="You can modify an existing database, by selecting the menu 'databases'. Here you will see the databases which is ready for being backed up. You can now double click on the database you want to modify." TextWrapping="Wrap" Margin="10,3,0,10"></TextBlock>
+
+                <!-- How Do I Remove An Existing Database? -->
+                <TextBlock Style="{StaticResource Emphasis}" Text="How do I remove an existing database?"></TextBlock>
+                <TextBlock Text="You can remove an existing database, by selecting the menu 'databases'. Here you will see the databases which is ready for being backed up. You can now double click on the database you want to remove. The modify database page now opens, and you can select the button remove database." TextWrapping="Wrap" Margin="10,3,0,10"></TextBlock>
+
+                <!-- Where is my backup files stored?  -->
+                <TextBlock Style="{StaticResource Emphasis}" Text="Where is my backup files stored?"></TextBlock>
+                <TextBlock Text="You can always check which location is used for the backup files by clicking the 'settings' en the top of this window, and then select the 'Configuration' tab from the side menu. The default backup location is used if you haven't modified this location." TextWrapping="Wrap" Margin="10,3,0,10"></TextBlock>
+
+                <!-- Is it possible never to delete old backup files?  -->
+                <TextBlock Style="{StaticResource Emphasis}" Text="Is it possible to never delete old backup files?"></TextBlock>
+                <TextBlock Text="Yes it is... All you have to do is to set the days to 0 (zero), in the configurations and cleanup of old backup files won't be performed. You can set the days by selecting the 'Settings' menu in the top of this window, and then select the menu 'Configuration'." TextWrapping="Wrap" Margin="10,3,0,10"></TextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
