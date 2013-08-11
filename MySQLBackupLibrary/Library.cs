@@ -134,6 +134,31 @@ namespace MySQLBackupLibrary
             logWriter.CloseWriter();
         }
 
+        /**
+         * Read the text from the log file from default location
+         */
+        public string GetLogText()
+        {
+            LogReader logReader = new LogReader();
+            logReader.OpenReader();
+            string text = logReader.Read();
+            logReader.CloseReader();
+            return text;
+        }
+
+        /**
+         * Read the text from the log file from custom location
+         */
+        public string GetLogText(string location)
+        {
+            LogReader logReader = new LogReader();
+            logReader.LogLocation = location;
+            logReader.OpenReader();
+            string text = logReader.Read();
+            logReader.CloseReader();
+            return text;
+        }
+
         public string GetConfigRootLocation()
         {
             return Utilities.ROOT_LOCATION;

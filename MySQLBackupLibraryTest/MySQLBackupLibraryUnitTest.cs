@@ -220,6 +220,14 @@ namespace MySQLBackupLibraryTest
         }
 
         [TestMethod]
+        public void GetLogTextAtDefaultLocation()
+        {
+            Library lib = new Library();
+            Assert.IsNotNull(lib.GetLogText());
+            lib = null;
+        }
+
+        [TestMethod]
         public void LogMessageAtCustomLocationTest()
         {
             Library lib = new Library();
@@ -235,6 +243,20 @@ namespace MySQLBackupLibraryTest
             File.Delete(@"C:\LogMessageTest\Log.txt");
             Directory.Delete(@"C:\LogMessageTest\");
 
+            lib = null;
+        }
+
+        [TestMethod]
+        public void GetLogTextCustomDefaultLocation()
+        {
+            Library lib = new Library();
+            lib.LogMessage("ERROR", "This is a test log message", @"C:\LogMessageTest");
+
+            Assert.IsNotNull(lib.GetLogText(@"C:\LogMessageTest"));
+
+            //Delete test Log file and custom directory
+            File.Delete(@"C:\LogMessageTest\Log.txt");
+            Directory.Delete(@"C:\LogMessageTest\");
             lib = null;
         }
 
