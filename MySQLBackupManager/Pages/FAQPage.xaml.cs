@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MySQLBackupManager.Pages
 {
     /// <summary>
-    /// Interaction logic for HelpPage.xaml
+    /// Interaction logic for FAQPage.xaml
     /// </summary>
-    public partial class HelpPage : Page
+    public partial class FAQPage : Page
     {
-        public HelpPage()
+        public FAQPage()
         {
             InitializeComponent();
         }

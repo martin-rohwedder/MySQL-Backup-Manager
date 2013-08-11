@@ -25,7 +25,8 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Help">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Help" Source="/Pages/HelpPage.xaml" />
+                <mui:Link DisplayName="FAQ" Source="/Pages/FAQPage.xaml" />
+                <mui:Link DisplayName="Show Log" Source="/Pages/ShowLogPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         
