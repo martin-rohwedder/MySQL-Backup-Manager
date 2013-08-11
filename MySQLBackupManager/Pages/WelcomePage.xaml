@@ -8,7 +8,7 @@
 	Title="WelcomePage">
 
     <StackPanel Style="{StaticResource ContentRoot}" Height="Auto">
-        <TextBlock Text="Welcome to MySQL Backup Manager" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
+        <TextBlock Style="{StaticResource Heading2}" Text="WELCOME TO MYSQL BACKUP MANAGER" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
         
         <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
             <TextBlock Text="Welcome to MySQL Backup Manager. This application is a lightweight application, where you can manage which MySQL databases who needs backup. To begin adding a database to the backup procedure, please refer to the database section. In there you can add databases easily." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
