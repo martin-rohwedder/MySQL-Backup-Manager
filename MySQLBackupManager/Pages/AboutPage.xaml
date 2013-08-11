@@ -5,10 +5,21 @@
       xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
 	Title="About">
 
-    <Grid Style="{StaticResource ContentRoot}">
-        <TextBlock Text="About Page"></TextBlock>
-    </Grid>
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading2}" Text="ABOUT" Margin="0,0,0,20"></TextBlock>
+        <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
+            <TextBlock Text="MySQL Backup Manager is a sultion for you to create automatic backups, of your MySQL databases. This application consists of a software solution which uses a windows service for the automatic backup functionality, and this Graphical User Interface for modifying which databases needs backup." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock Text="This application is developed by Martin Rohwedder in the year 2013, and it's open source and therefore free to use and modify. The application is developed for the need of taking automatic backups of MySQL databases, but also to challenge me as a developer, in developing a usefull system which uses a Windows Service, a graphical user interface, and a Microsoft Library to bind all the functionality together." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock Text="The way this application works, is that it saves some xml nodes in a xml file, containing your database credentials, of those databases which needs backup. The windows service will then search this XML file every minute and perform a database backup if the start time matches the local systems current time. A microsoft library (DLL) then keeps the functionality seperated so both the Windows Service and the graphical user interface can use it." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,20">
+                If you're interested in looking over the source code, participating with new ideas or modifications, please head over to the MySQL Backup Manager's <Hyperlink NavigateUri="https://github.com/martin-rohwedder/MySQL-Backup-Manager" RequestNavigate="Hyperlink_RequestNavigate">GitHub page</Hyperlink> where you can join the discussion and create new issues regarding this project. You can also visit my <Hyperlink NavigateUri="http://www.martinrohwedder.dk" RequestNavigate="Hyperlink_RequestNavigate">personal website</Hyperlink> for more information about me, or other projects which I have created.
+            </TextBlock>
+        </StackPanel>
+    </StackPanel>
 </Page>

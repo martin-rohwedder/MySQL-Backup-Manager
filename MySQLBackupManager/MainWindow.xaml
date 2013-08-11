@@ -17,9 +17,9 @@
                 <mui:Link DisplayName="Add Database" Source="/Pages/AddDatabasePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="Information">
+        <mui:LinkGroup DisplayName="About">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="About" Source="/Pages/AboutPage.xaml" />
+                <mui:Link DisplayName="Information" Source="/Pages/AboutPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Help">
