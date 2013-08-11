@@ -9,6 +9,6 @@
 	Title="FAQ">
 
     <Grid Style="{StaticResource ContentRoot}">
-        <TextBlock Text="Help Page"></TextBlock>
+        <TextBlock Style="{StaticResource Heading2}" Text="FREQUENTLY ASKED QUESTION"></TextBlock>
     </Grid>
 </Page>
