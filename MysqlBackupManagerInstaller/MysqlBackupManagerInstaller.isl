@@ -2885,6 +2885,7 @@
 		<col def="I2">Order</col>
 		<col def="I2">ISSetupLocation</col>
 		<col def="S255">ISReleaseFlags</col>
+		<row><td>_BD66E9AA_6F6E_4A2F_890D_5D9A56943876_</td><td>Microsoft .NET Framework 4.5 Full.prq</td><td/><td/><td/></row>
 	</table>
 
 	<table name="ISSetupType">
@@ -4137,8 +4138,8 @@
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
 		<row><td>UNINST_Uninstall_M_971AF680F92441F89EFEBDF6376BB1EE.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2012SpringLE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
-		<row><td>_Built1_6DE14AAF511C4070925170288A312238.exe</td><td/><td>C:\Users\Martin Rohwedder\Desktop\MBM-Desktop.ico</td><td>2</td></row>
-		<row><td>_Built_EB8A39D481A349EB88219AB7437905DA.exe</td><td/><td>C:\Users\Martin Rohwedder\Desktop\MBM-Desktop.ico</td><td>3</td></row>
+		<row><td>_Built1_CEBFDFE2AC3F4A07B11D9E14232BE447.exe</td><td/><td>C:\dev\C#\Projects\MySQL-Backup-Manager\MySQLBackupManager\MBM-Desktop.ico</td><td>2</td></row>
+		<row><td>_Built_AE919F2BDD06431983EFBFBF564F51AE.exe</td><td/><td>C:\dev\C#\Projects\MySQL-Backup-Manager\MySQLBackupManager\MBM-Desktop.ico</td><td>3</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4822,8 +4823,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
 		<row><td>UNINST_Uninstall_Mysql_Backup_Manager</td><td>mysqlb_1_mysql_backup_manager</td><td>UNINST|Uninstall Mysql Backup Manager</td><td>NewComponent1</td><td>[SystemFolder]msiexec.exe</td><td>/x {E3BA710E-B4B8-4359-8328-C98B1CC97713}</td><td/><td/><td>UNINST_Uninstall_M_971AF680F92441F89EFEBDF6376BB1EE.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built</td><td>mysqlb_1_mysql_backup_manager</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>MySQLBackupManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_EB8A39D481A349EB88219AB7437905DA.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>MySQLBackupManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_6DE14AAF511C4070925170288A312238.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>mysqlb_1_mysql_backup_manager</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>MySQLBackupManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_AE919F2BDD06431983EFBFBF564F51AE.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>MySQLBackupManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_CEBFDFE2AC3F4A07B11D9E14232BE447.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
