@@ -247,6 +247,40 @@ namespace MySQLBackupLibraryTest
         }
 
         [TestMethod]
+        public void ClearLogAtDefaultLocationTest()
+        {
+            Library lib = new Library();
+            lib.ClearLog();
+
+            StreamReader reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\MySQLBackup\Log.txt");
+            string output = reader.ReadLine();
+            reader.Close();
+
+            Assert.IsNull(output);
+
+            lib = null;
+        }
+
+        [TestMethod]
+        public void ClearLogAtCustomLocationTest()
+        {
+            Library lib = new Library();
+            lib.LogMessage("ERROR", "This is a test log message", @"C:\LogMessageTest");
+            lib.ClearLog(@"C:\LogMessageTest");
+
+            StreamReader reader = new StreamReader(@"C:\LogMessageTest\Log.txt");
+            string output = reader.ReadLine();
+            reader.Close();
+
+            Assert.IsNull(output);
+
+            //Delete test Log file and custom directory
+            File.Delete(@"C:\LogMessageTest\Log.txt");
+            Directory.Delete(@"C:\LogMessageTest\");
+            lib = null;
+        }
+
+        [TestMethod]
         public void GetLogTextCustomDefaultLocation()
         {
             Library lib = new Library();

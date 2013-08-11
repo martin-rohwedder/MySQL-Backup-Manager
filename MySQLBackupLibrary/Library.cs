@@ -159,6 +159,23 @@ namespace MySQLBackupLibrary
             return text;
         }
 
+        /**
+         * Clear log file from default location
+         */
+        public void ClearLog()
+        {
+            System.IO.File.WriteAllText(Utilities.ROOT_LOCATION + "Log.txt", String.Empty);
+        }
+
+        /**
+         * Clear log file from custom location
+         */
+        public void ClearLog(string location)
+        {
+            location = (location.EndsWith(@"\")) ? location : location + @"\";
+            System.IO.File.WriteAllText(location + "Log.txt", String.Empty);
+        }
+
         public string GetConfigRootLocation()
         {
             return Utilities.ROOT_LOCATION;
