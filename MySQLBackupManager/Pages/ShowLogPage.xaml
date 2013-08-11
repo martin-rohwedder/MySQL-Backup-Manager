@@ -3,11 +3,24 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernUI"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
-	Title="Show Log">
+	Title="Show Log" mui:ModernFrame.KeepAlive="false">
 
-    <Grid>
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading2}" Text="SHOW LOG" Margin="0,0,0,20"></TextBlock>
+
+        <TextBlock Text="Below you can check the information logged in the log file." Margin="0,0,0,10"></TextBlock>
+
+        <xctk:RichTextBox x:Name="LogTextBox" Padding="5" BorderBrush="Gray" Height="350" IsReadOnly="True" MaxHeight="350" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+            <xctk:RichTextBox.TextFormatter>
+                <xctk:PlainTextFormatter />
+            </xctk:RichTextBox.TextFormatter>
+        </xctk:RichTextBox>
         
-    </Grid>
+        <Button x:Name="ClearLogButton" Content="Clear Log" Width="120" HorizontalAlignment="Right" Click="ClearLogButton_Click"></Button>
+        
+    </StackPanel>
 </Page>

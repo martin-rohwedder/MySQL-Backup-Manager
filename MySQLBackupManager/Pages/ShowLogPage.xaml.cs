@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySQLBackupLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,19 @@ namespace MySQLBackupManager.Pages
     /// </summary>
     public partial class ShowLogPage : Page
     {
+        private readonly Library library = new Library();
+
         public ShowLogPage()
         {
             InitializeComponent();
+
+            LogTextBox.Text = library.GetLogText().Replace("\n", "");
+        }
+
+        private void ClearLogButton_Click(object sender, RoutedEventArgs e)
+        {
+            library.ClearLog();
+            LogTextBox.Text = library.GetLogText().Replace("\n", "");
         }
     }
 }

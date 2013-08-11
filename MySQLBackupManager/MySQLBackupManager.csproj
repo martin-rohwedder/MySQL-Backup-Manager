@@ -146,7 +146,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\HelpPage.xaml">
+    <Page Include="Pages\FAQPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,20 +158,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShowLogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\HelpPage.xaml.cs">
-      <DependentUpon>HelpPage.xaml</DependentUpon>
+    <Compile Include="Pages\FAQPage.xaml.cs">
+      <DependentUpon>FAQPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ModifyDatabasePage.xaml.cs">
       <DependentUpon>ModifyDatabasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowLogPage.xaml.cs">
+      <DependentUpon>ShowLogPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
