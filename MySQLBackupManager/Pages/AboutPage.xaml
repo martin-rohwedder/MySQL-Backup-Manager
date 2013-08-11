@@ -9,7 +9,7 @@
 	Title="About">
 
     <StackPanel Style="{StaticResource ContentRoot}">
-        <TextBlock Style="{StaticResource Heading2}" Text="ABOUT" Margin="0,0,0,20"></TextBlock>
+        <TextBlock Style="{StaticResource Heading2}" Text="INFORMATION" Margin="0,0,0,20"></TextBlock>
         <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
             <TextBlock Text="MySQL Backup Manager is a sultion for you to create automatic backups, of your MySQL databases. This application consists of a software solution which uses a windows service for the automatic backup functionality, and this Graphical User Interface for modifying which databases needs backup." TextWrapping="Wrap" Margin="0,0,0,20"></TextBlock>
 
