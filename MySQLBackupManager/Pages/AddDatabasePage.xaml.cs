@@ -48,7 +48,8 @@ namespace MySQLBackupManager.Pages
 
             ResetTextBoxfields();
 
-            ModernDialog.ShowMessage("The database has been added!", "Success", MessageBoxButton.OK);
+            ModernDialog.ShowMessage(string.Format("The database '{0}' has been added!", dbInfo.DatabaseName), "Success", MessageBoxButton.OK);
+            dbInfo = null;
             NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
         }
 

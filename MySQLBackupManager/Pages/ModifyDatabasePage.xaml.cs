@@ -24,6 +24,19 @@ namespace MySQLBackupManager.Pages
     {
         private readonly Library library = new Library();
 
+        private string currentDatabaseName;
+        public string CurrentDatabaseName
+        {
+            get
+            {
+                return this.currentDatabaseName;
+            }
+            set
+            {
+                this.currentDatabaseName = value;
+            }
+        }
+
         private DatabaseInfo currentDbInfo;
         public DatabaseInfo CurrentDbInfo
         {
@@ -68,6 +81,7 @@ namespace MySQLBackupManager.Pages
                     NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
                 }
                 CurrentDbInfo = dbInfo;
+                CurrentDatabaseName = dbInfo.DatabaseName;
                 CurrentStartTime = dbInfo.StartTime.ToString();
             }
         }
@@ -89,18 +103,31 @@ namespace MySQLBackupManager.Pages
             string[] startTimeSplit = startTime.Text.Split(':');
             CurrentDbInfo.StartTimeHour = Convert.ToInt32(startTimeSplit[0]);
             CurrentDbInfo.StartTimeMinute = Convert.ToInt32(startTimeSplit[1]);
-            library.UpdateDatabaseNode(CurrentDbInfo);
 
+            if (CurrentDatabaseName.ToLower().Equals(CurrentDbInfo.DatabaseName.ToLower()))
+            {
+                library.UpdateDatabaseNode(CurrentDbInfo);
+            }
+            else
+            {
+                library.RemoveDatabaseNode(CurrentDatabaseName);
+                library.InsertDatabaseNode(CurrentDbInfo);
+            }
+
+
+            CurrentDatabaseName = "";
+            library.LogMessage("INFO", string.Format("The database {0} has been successfully modified", CurrentDbInfo.DatabaseName));
             NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
         }
 
         private void RemoveDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage("Are you sure that you want to remove the database?\nThis action can't be undone!", "Remove Database", MessageBoxButton.YesNo);
+            var result = FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(string.Format("Are you sure that you want to remove the database '{0}'?\nThis action can't be undone!", CurrentDatabaseName), "Remove Database", MessageBoxButton.YesNo);
 
             if (result.ToString().ToLower().Equals("yes"))
             {
-                library.RemoveDatabaseNode(CurrentDbInfo.DatabaseName);
+                library.RemoveDatabaseNode(CurrentDatabaseName);
+                library.LogMessage("INFO", string.Format("The database {0} has been successfully removed", CurrentDatabaseName));
                 NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
             }
         }
