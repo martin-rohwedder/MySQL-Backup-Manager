@@ -2,7 +2,7 @@
 
 > MySQL Backup Manager is a simple solution, which automates the process of taking dayli backups, of your MySQL databases. The software consists of a Windows service, which handles the automatization of taking backups and cleaning up old backups, and a graphical user interface application which lets the user modify which databases needs backup and other kind of features.
 
-To begin use the software head over to my [website](http://www.martinrohwedder.dk), to learn more about the software or to download it.
+To begin use you can download it free from [SourceForge.net](https://sourceforge.net/projects/mysqlbackupmanager/).
 
 ### System Requirements ###
 
