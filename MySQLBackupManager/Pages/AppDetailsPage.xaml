@@ -31,7 +31,7 @@
 
                 <!-- Version Number -->
                 <TextBlock Text="Version" FontWeight="SemiBold" Grid.Row="1" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Text="1.0.0.0" Grid.Row="1" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="1.1.0.0" Grid.Row="1" Grid.Column="1" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
                 
                 <!-- Developer -->
                 <TextBlock Text="Developer" FontWeight="SemiBold" Grid.Row="2" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></TextBlock>
