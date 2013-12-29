@@ -4658,7 +4658,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]MySQLBackupManager.Primary output</td><td/></row>
 		<row><td>ProductCode</td><td>{E3BA710E-B4B8-4359-8328-C98B1CC97713}</td><td/></row>
 		<row><td>ProductName</td><td>Mysql Backup Manager</td><td/></row>
-		<row><td>ProductVersion</td><td>1.1.0.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.2.0.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>

@@ -71,7 +71,7 @@ namespace MySQLBackupService.Classes
                         psi.RedirectStandardOutput = true;
                         psi.RedirectStandardError = true;
                         psi.StandardOutputEncoding = Encoding.UTF8;
-                        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}", dbInfo.User, dbInfo.Password, dbInfo.Host, this.databaseName);
+                        psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} --add-drop-database --add-drop-table --add-locks --comments --create-options --dump-date --lock-tables --databases {3}", dbInfo.User, dbInfo.Password, dbInfo.Host, this.databaseName);
                         psi.UseShellExecute = false;
                         psi.CreateNoWindow = true;
 
