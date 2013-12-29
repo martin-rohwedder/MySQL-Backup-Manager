@@ -1,4 +1,4 @@
-# MySQL Backup Manager 1.1 #
+# MySQL Backup Manager 1.2 #
 
 > MySQL Backup Manager is a simple solution, which automates the process of taking dayli backups, of your MySQL databases. The software consists of a Windows service, which handles the automatization of taking backups and cleaning up old backups, and a graphical user interface application which lets the user modify which databases needs backup and other kind of features.
 
