@@ -40,7 +40,7 @@
 
                 <!-- Password -->
                 <Label Target="{Binding ElementName=passwordTextBox}" Content="Password:" Grid.Row="3" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
-                <TextBox Name="passwordTextBox" Grid.Column="1" Grid.Row="3" Margin="0,0,0,8"></TextBox>
+                <PasswordBox Name="passwordTextBox" Grid.Column="1" Grid.Row="3" Margin="0,0,0,8"></PasswordBox>
 
                 <!-- Start Time -->
                 <Label Target="{Binding ElementName=passwordTextBox}" Content="Start Time:" Grid.Row="4" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>

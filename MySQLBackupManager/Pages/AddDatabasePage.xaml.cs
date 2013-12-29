@@ -38,7 +38,7 @@ namespace MySQLBackupManager.Pages
             dbInfo.Host = hostTextBox.Text;
             dbInfo.DatabaseName = databaseTextBox.Text;
             dbInfo.User = userTextBox.Text;
-            dbInfo.Password = passwordTextBox.Text;
+            dbInfo.Password = passwordTextBox.Password;
 
             string[] startTimeSplit = startTime.Text.Split(':');
             dbInfo.StartTimeHour = Convert.ToInt32(startTimeSplit[0]);
@@ -58,7 +58,7 @@ namespace MySQLBackupManager.Pages
             hostTextBox.Text = "";
             databaseTextBox.Text = "";
             userTextBox.Text = "";
-            passwordTextBox.Text = "";
+            passwordTextBox.Password = "";
         }
     }
 }

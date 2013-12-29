@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
       xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+      xmlns:pa="clr-namespace:MySQLBackupManager.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="300"
 	Title="ModifyDatabasePage" mui:ModernFrame.KeepAlive="false">
@@ -42,7 +43,7 @@
 
                 <!-- Password -->
                 <Label Target="{Binding ElementName=passwordTextBox}" Content="Password:" Grid.Row="3" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>
-                <TextBox Name="passwordTextBox" Grid.Column="1" Grid.Row="3" Margin="0,0,0,8" Text="{Binding CurrentDbInfo.Password, Mode=TwoWay}"></TextBox>
+                <PasswordBox Name="passwordTextBox" Grid.Column="1" Grid.Row="3" Margin="0,0,0,8" pa:PasswordBoxAssistant.BindPassword="true" pa:PasswordBoxAssistant.BoundPassword="{Binding CurrentDbInfo.Password, Mode=TwoWay}"></PasswordBox>
 
                 <!-- Start Time -->
                 <Label Target="{Binding ElementName=passwordTextBox}" Content="Start Time:" Grid.Row="4" Grid.Column="0" Margin="0,0,16,8" VerticalAlignment="Center"></Label>

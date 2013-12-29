@@ -177,6 +177,7 @@
     <Compile Include="Pages\ModifyDatabasePage.xaml.cs">
       <DependentUpon>ModifyDatabasePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PasswordBoxAssistant.cs" />
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
