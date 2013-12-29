@@ -32,7 +32,7 @@ namespace MySQLBackupLibrary.Classes
 
             //Create the Password Node
             XmlNode passwordNode = document.CreateElement("Password");
-            passwordNode.InnerText = databaseInfo.Password;
+            passwordNode.InnerText = EncryptionHelper.Encrypt(databaseInfo.Password);
             databaseNode.AppendChild(passwordNode);
 
             //Create the Backup Settings Node
@@ -91,7 +91,7 @@ namespace MySQLBackupLibrary.Classes
                 dbInfo.DatabaseName = databaseName.ToLower();
                 dbInfo.Host = databaseNode["Host"].InnerText;
                 dbInfo.User = databaseNode["User"].InnerText;
-                dbInfo.Password = databaseNode["Password"].InnerText;
+                dbInfo.Password = EncryptionHelper.Decrypt(databaseNode["Password"].InnerText);
 
                 XmlNode backupSettingsNode = databaseNode["BackupSettings"];
 
@@ -118,7 +118,7 @@ namespace MySQLBackupLibrary.Classes
                 dbInfo.DatabaseName = node.Attributes["Name"].Value;
                 dbInfo.Host = node["Host"].InnerText;
                 dbInfo.User = node["User"].InnerText;
-                dbInfo.Password = node["Password"].InnerText;
+                dbInfo.Password = EncryptionHelper.Decrypt(node["Password"].InnerText);
 
                 XmlNode backupSettingsNode = node["BackupSettings"];
 
