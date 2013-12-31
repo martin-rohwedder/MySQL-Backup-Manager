@@ -189,10 +189,17 @@ namespace MySQLBackupLibrary
             return Utilities.RetrieveMySQLInstallationBinPath();
         }
 
-        public void CreateBackup(System.Diagnostics.Process process, string databaseName)
+        public void CreateBackup(System.Diagnostics.Process process, string databaseName, bool isManual)
         {
             MySQLDumpProcess dumpProcess = new MySQLDumpProcess(databaseName, this);
-            dumpProcess.ProcessMySqlDump(process);
+            if (isManual)
+            {
+                dumpProcess.ProcessMySqlDump(process, databaseName);
+            }
+            else
+            {
+                dumpProcess.ProcessMySqlDump(process);
+            }
         }
     }
 }

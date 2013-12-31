@@ -7,7 +7,7 @@
       xmlns:mui="http://firstfloorsoftware.com/ModernUI"
       xmlns:pa="clr-namespace:MySQLBackupManager.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="340" d:DesignWidth="300"
+      d:DesignHeight="360" d:DesignWidth="300"
 	Title="ModifyDatabasePage" mui:ModernFrame.KeepAlive="false">
 
     <Grid HorizontalAlignment="Left" Style="{StaticResource ContentRoot}">
@@ -16,6 +16,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -51,7 +52,9 @@
 
                 <Button x:Name="ModifyDatabaseButton" Content="Modify Database" Grid.Row="5" Grid.Column="1" Margin="0,10" Click="ModifyDatabaseButton_Click"></Button>
 
-                <Button x:Name="RemoveDatabaseButton" Content="Remove Database" Grid.Row="6" Grid.Column="1" Margin="0,10,0,10" Click="RemoveDatabaseButton_Click"></Button>
+                <Button x:Name="MakeManualBackupButton" Content="Backup Database Now" Grid.Row="6" Grid.Column="1" Margin="0,10" Click="MakeManualBackupButton_Click"></Button>
+                
+                <Button x:Name="RemoveDatabaseButton" Content="Remove Database" Grid.Row="7" Grid.Column="1" Margin="0,10,0,10" Click="RemoveDatabaseButton_Click"></Button>
 
             </Grid>
         </StackPanel>

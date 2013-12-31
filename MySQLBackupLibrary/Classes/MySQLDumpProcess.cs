@@ -72,6 +72,46 @@ namespace MySQLBackupLibrary.Classes
         }
 
         /**
+         * Process The MySQL Dump for a single database
+         */
+        public void ProcessMySqlDump(Process process, string databaseName)
+        {
+            DatabaseInfo dbInfo = library.RetrieveDatabaseNode(databaseName);
+
+            if (dbInfo != null)
+            {
+                if (!isServerDown)
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = "mysqldump";
+                    psi.RedirectStandardInput = false;
+                    psi.RedirectStandardOutput = true;
+                    psi.RedirectStandardError = true;
+                    psi.StandardOutputEncoding = Encoding.UTF8;
+                    psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} --add-drop-database --add-drop-table --add-locks --comments --create-options --dump-date --lock-tables --databases {3}", dbInfo.User, dbInfo.Password, dbInfo.Host, this.databaseName);
+                    psi.UseShellExecute = false;
+                    psi.CreateNoWindow = true;
+
+                    process = Process.Start(psi);
+
+                    this.output = process.StandardOutput.ReadToEnd();
+                    this.error = process.StandardError.ReadToEnd();
+
+                    if (!this.HasErrorOccured(this.error))
+                    {
+                        library.WriteBackupFile(this.databaseName, this.output);
+                        library.LogMessage("INFO", "Backup created of the database " + this.databaseName);
+                    }
+                }
+
+                if (process != null)
+                {
+                    process.WaitForExit();
+                }
+            }
+        }
+
+        /**
          * Find out if an error has occured during the backup dump. Returns true if error has occured
          */
         private bool HasErrorOccured(string errorOutput)

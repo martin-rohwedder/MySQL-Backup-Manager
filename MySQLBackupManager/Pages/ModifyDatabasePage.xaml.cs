@@ -2,6 +2,7 @@
 using MySQLBackupLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,6 +130,30 @@ namespace MySQLBackupManager.Pages
                 library.RemoveDatabaseNode(CurrentDatabaseName);
                 library.LogMessage("INFO", string.Format("The database {0} has been successfully removed", CurrentDatabaseName));
                 NavigationCommands.GoToPage.Execute(new Uri("/Pages/DatabasesPage.xaml", UriKind.Relative), FirstFloor.ModernUI.Windows.Navigation.NavigationHelper.FindFrame(null, this));
+            }
+        }
+
+        private void MakeManualBackupButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process process = null;
+
+            try
+            {
+                library.CreateBackup(process, currentDbInfo.DatabaseName, true);
+                library.LogMessage("INFO", string.Format("Backup created of the database {0}", CurrentDbInfo.DatabaseName));
+                FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(string.Format("A backup of the database {0} has been created!", CurrentDbInfo.DatabaseName), "Success", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (process != null)
+                {
+                    process.Close();
+                }
+                CurrentDatabaseName = "";
             }
         }
     }

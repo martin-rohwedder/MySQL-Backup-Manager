@@ -27,7 +27,7 @@ namespace MySQLBackupService.Classes
 
             try
             {
-                library.CreateBackup(process, databaseName);
+                library.CreateBackup(process, databaseName, false);
             }
             catch (Exception ex)
             {
