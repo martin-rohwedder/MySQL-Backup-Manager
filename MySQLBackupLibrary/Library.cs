@@ -188,5 +188,11 @@ namespace MySQLBackupLibrary
         {
             return Utilities.RetrieveMySQLInstallationBinPath();
         }
+
+        public void CreateBackup(System.Diagnostics.Process process, string databaseName)
+        {
+            MySQLDumpProcess dumpProcess = new MySQLDumpProcess(databaseName, this);
+            dumpProcess.ProcessMySqlDump(process);
+        }
     }
 }
