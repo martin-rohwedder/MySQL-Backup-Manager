@@ -47,6 +47,7 @@
     <Compile Include="Classes\LogReader.cs" />
     <Compile Include="Classes\LogWriter.cs" />
     <Compile Include="Classes\MySQLDumpProcess.cs" />
+    <Compile Include="Classes\RestoreDatabaseProcess.cs" />
     <Compile Include="Classes\Utilities.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Library.cs" />

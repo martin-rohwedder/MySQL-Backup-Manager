@@ -1,0 +1,25 @@
+﻿<Page x:Class="MySQLBackupManager.Pages.RestoreDatabasePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="Restore A Database">
+
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading2}" Text="DATABASE RESTORE" Margin="0,0,0,20"></TextBlock>
+
+        <StackPanel Orientation="Vertical" Width="500" HorizontalAlignment="Left">
+
+            <TextBlock Text="Here you can restore a database, from one of your backup files, saved on your computer. The process of restoring a database is very simple. You click the button 'Restore Database' below, and then grabs the backup dump file, you want to restore from, and the application will then handle the rest automatically." TextWrapping="Wrap" Margin="0,0,0,10"></TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,20">
+                <Bold>NOTICE:</Bold> Restoring a database, will delete the database from MySQL, and replace it with the data created in the selected backup dump file.
+            </TextBlock>
+
+            <Button x:Name="SelectBackupDumpFileButton" Content="Do a Database Restore" Click="SelectBackupDumpFileButton_Click"></Button>
+
+        </StackPanel>
+    </StackPanel>
+</Page>

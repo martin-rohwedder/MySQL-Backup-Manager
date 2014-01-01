@@ -157,6 +157,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RestoreDatabasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +182,9 @@
       <DependentUpon>ModifyDatabasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PasswordBoxAssistant.cs" />
+    <Compile Include="Pages\RestoreDatabasePage.xaml.cs">
+      <DependentUpon>RestoreDatabasePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>

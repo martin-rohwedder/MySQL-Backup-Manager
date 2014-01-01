@@ -15,6 +15,7 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="My Databases" Source="/Pages/DatabasesPage.xaml" />
                 <mui:Link DisplayName="Add Database" Source="/Pages/AddDatabasePage.xaml" />
+                <mui:Link DisplayName="Restore A Database" Source="/Pages/RestoreDatabasePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="About">

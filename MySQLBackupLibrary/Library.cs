@@ -189,6 +189,9 @@ namespace MySQLBackupLibrary
             return Utilities.RetrieveMySQLInstallationBinPath();
         }
 
+        /**
+         * Create a backup of a database. It can either use the automatic process, which iterates through all databases or the manual, which doesn't iterate
+         */
         public void CreateBackup(System.Diagnostics.Process process, string databaseName, bool isManual)
         {
             MySQLDumpProcess dumpProcess = new MySQLDumpProcess(databaseName, this);
@@ -200,6 +203,15 @@ namespace MySQLBackupLibrary
             {
                 dumpProcess.ProcessMySqlDump(process);
             }
+        }
+
+        /**
+         * Restore a specific database, from a backup dump file.
+         */
+        public void RestoreDatabase(System.Diagnostics.Process process, string dumpFilePath, DatabaseInfo dbInfo)
+        {
+            RestoreDatabaseProcess restoreProcess = new RestoreDatabaseProcess(this, dumpFilePath, dbInfo);
+            restoreProcess.RestoreDatabase(process);
         }
     }
 }
