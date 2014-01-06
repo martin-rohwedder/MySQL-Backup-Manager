@@ -140,7 +140,6 @@ namespace MySQLBackupManager.Pages
             try
             {
                 library.CreateBackup(process, currentDbInfo.DatabaseName, true);
-                library.LogMessage("INFO", string.Format("Backup created of the database {0}", CurrentDbInfo.DatabaseName));
                 FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(string.Format("A backup of the database {0} has been created!", CurrentDbInfo.DatabaseName), "Success", MessageBoxButton.OK);
             }
             catch (Exception ex)
